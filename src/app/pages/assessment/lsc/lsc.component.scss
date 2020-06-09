@@ -1,0 +1,25 @@
+.vertical {
+  vertical-align: baseline !important;
+  position: absolute;
+  margin: -9px 0px 0 5px;
+  height: 188px;
+}
+
+img {
+  vertical-align: baseline !important;
+  margin-left: 5px;
+}
+
+.content-header {
+  text-align: center !important;
+}
+
+img.center {
+  display: block;
+  margin: 0 auto;
+}
+
+video.center {
+  display: block;
+  margin: 0 auto;
+}

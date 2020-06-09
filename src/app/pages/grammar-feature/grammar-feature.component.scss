@@ -1,0 +1,244 @@
+@import "../../../variables";
+.map {
+  height: 100%;
+  width: 100%;
+}
+
+.filter-content.filter-grammar-features {
+  width: calc(100% - 60px);
+  position: absolute;
+  z-index: 1;
+  right: 0;
+
+  .filters {
+    max-width: 1330px;
+    background: #ffffff;
+    margin: auto;
+    margin-top: 8px;
+    height: auto;
+  }
+
+  @media (min-width: 769px) and (max-width: 1367px) {
+    .filters {
+      max-width: 850px;
+      margin-left: 15px;
+      margin-right: 15px;
+    }
+  }
+
+  form {
+    height: 100%;
+  }
+  .form-group {
+    flex: 1;
+    margin: 0;
+    padding: 16px;
+    position: relative;
+    display: flex;
+    & + .form-group {
+      border-left: 1px solid #ccc;
+    }
+    .feature-selected {
+      font-size: 10pt;
+      width: calc(100% - 70px);
+    }
+
+    .icons {
+      /* position: absolute;
+      right: 20px;
+      top: 6px;
+      display: flex; */
+      position: absolute;
+      right: 5px;
+      top: 0;
+      bottom: 0;
+      display: flex;
+      width: 70px;
+      align-items: center;
+      height: 100%;
+      mat-icon {
+        color: rgba(map-get($cini-colors, color-black), 0.5);
+        cursor: pointer;
+      }
+
+      .submitted-icons {
+        display: flex;
+        mat-icon {
+          color: #000000;
+          cursor: pointer;
+          margin-right: 5px;
+
+          &.info-icon:hover {
+            color: #1592e6;
+            box-shadow: 0 0 3pt 2pt #f6cd05;
+            border-radius: 50%;
+          }
+        }
+
+        .info-icon-wrapper {
+          width: 24px;
+          margin-right: 10px;
+          cursor: pointer;
+          .info-active-icon.special {
+            display: block;
+          }
+          .info-active-icon {
+            display: none;
+          }
+
+          &:hover {
+            /* .info-icon {
+              display: none;
+            } */
+
+            .info-active-icon {
+              display: block;
+            }
+          }
+        }
+      }
+    }
+
+    input:not([value]) {
+      background: #f8f8f8;
+    }
+
+    input {
+      width: 100%;
+      background: #ffffff;
+      border: none;
+      height: 35px;
+
+      font-family: "Roboto";
+      line-height: 20px;
+      max-width: 100%;
+      padding-left: 5px;
+      padding-right: 15px;
+      color: #000000;
+      font-weight: bold;
+      font-size: 17px;
+
+      cursor: default;
+
+      &:focus {
+        outline: none;
+      }
+
+      &::-webkit-input-placeholder {
+        /* Chrome/Opera/Safari */
+        color: rgba(0, 0, 0, 0.5);
+        font-weight: normal;
+        font-size: 14px;
+      }
+      &::-moz-placeholder {
+        /* Firefox 19+ */
+        color: rgba(0, 0, 0, 0.5);
+        font-weight: normal;
+        font-size: 14px;
+      }
+      &:-ms-input-placeholder {
+        /* IE 10+ */
+        color: rgba(0, 0, 0, 0.5);
+        font-weight: normal;
+        font-size: 14px;
+      }
+      &:-moz-placeholder {
+        /* Firefox 18- */
+        color: rgba(0, 0, 0, 0.5);
+        font-weight: normal;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .form-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    // justify-content: space-between;
+  }
+  @media screen and (max-width: 999px) {
+    .form-content {
+      flex-wrap: wrap;
+
+      .form-group {
+        flex: 0 0 100%;
+      }
+    }
+  }
+  .vertical-devider {
+    width: 5px;
+    height: 80%;
+    background: #dddddd;
+    margin-right: 12px;
+  }
+
+  .info-details {
+    background: #ffffff;
+    width: 95%;
+    max-width: 1310px;
+    position: absolute;
+    margin: 0 10px;
+    min-height: 200px;
+    padding: 15px;
+    box-shadow: inset 0 8px 10px -6px rgba(0, 0, 0, 0.26);
+  }
+
+  .top-breadcrumb {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    button {
+      border-radius: 20px;
+      background: #1592e6;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 24px;
+      font-size: 12px;
+      font-family: "Open Sans", sans-serif;
+    }
+
+    .feature-breadcrumb {
+      align-items: center;
+    }
+
+    span {
+      font-size: 20px;
+      font-family: "Roboto";
+      color: rgba(0, 0, 0, 0.8);
+    }
+    span:nth-of-type(2n) {
+      margin: 0 10px;
+    }
+
+    span:last-of-type {
+      font-weight: bold;
+    }
+  }
+
+  .introduction {
+    h4 {
+      font-size: 16px;
+      font-family: "Open Sans", sans-serif;
+
+      em {
+        font-weight: normal;
+      }
+    }
+
+    p {
+      font-family: "Roboto";
+      font-size: 14px;
+      line-height: 21px;
+    }
+  }
+}
+::ng-deep canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  object-fit: cover !important;
+}

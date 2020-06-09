@@ -1,0 +1,228 @@
+@import "variables_cinicons";
+
+@font-face {
+  font-family: '#{$icomoon-font-family}';
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?ecjeu4');
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?ecjeu4#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?ecjeu4') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?ecjeu4') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?ecjeu4##{$icomoon-font-family}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+$colors: (
+
+color-orange:rgb(245,121,59),
+color-blue: rgb(0,114,178),
+color-red: #ff0000,
+color-green: rgb(0, 158,115),
+color-yellow: rgb(240,228,66), 
+color-purple: rgb(204,121,167),
+color-gray: #565656,
+color-sky-blue: rgb(86,180,233),
+color-dark-blue: rgb(14,32,128),
+color-black: #000000,
+  
+);
+
+@mixin color-modifiers {
+  @each $name, $hex in $colors {
+    &[color= "#{$name}"] {
+      color: $hex;
+    } 
+  }
+}
+
+.cinicon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: '#{$icomoon-font-family}' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  
+  /* Enable Ligatures ================ */
+  letter-spacing: 0;
+  -webkit-font-feature-settings: "liga";
+  -moz-font-feature-settings: "liga=1";
+  -moz-font-feature-settings: "liga";
+  -ms-font-feature-settings: "liga" 1;
+  font-feature-settings: "liga";
+  -webkit-font-variant-ligatures: discretionary-ligatures;
+  font-variant-ligatures: discretionary-ligatures;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.cinicon{
+  @include color-modifiers
+}
+/*
+* icon shapres (based on sides):
+* 1 = circle, 2 = diamond, 3 = triangle, 4 = square, 5 = penthagon
+
+* icon pattern
+* circle (central point), line (vertical line), minus (horizontal line), plus
+
+* icon colors
+* default color is black
+* add attribute color and hex color code
+* es <span class="icon icon-3-minus" color="red" aria-hidden="true"></span>
+*/
+.cinicon-1 {
+  &:before {
+    content: $cinicon-1; 
+  }
+}
+.cinicon-2 {
+  &:before {
+    content: $cinicon-2; 
+  }
+}
+.cinicon-3 {
+  &:before {
+    content: $cinicon-3; 
+  }
+}
+.cinicon-4 {
+  &:before {
+    content: $cinicon-4; 
+  }
+}
+.cinicon-5 {
+  &:before {
+    content: $cinicon-5; 
+  }
+}
+.cinicon-1-circle {
+  &:before {
+    content: $cinicon-1-circle; 
+  }
+}
+.cinicon-2-circle {
+  &:before {
+    content: $cinicon-2-circle; 
+  }
+}
+.cinicon-3-circle {
+  &:before {
+    content: $cinicon-3-circle; 
+  }
+}
+.cinicon-4-circle {
+  &:before {
+    content: $cinicon-4-circle; 
+  }
+}
+.cinicon-5-circle {
+  &:before {
+    content: $cinicon-5-circle; 
+  }
+}
+.cinicon-1-line {
+  &:before {
+    content: $cinicon-1-line; 
+  }
+}
+.cinicon-2-line {
+  &:before {
+    content: $cinicon-2-line; 
+  }
+}
+.cinicon-3-line {
+  &:before {
+    content: $cinicon-3-line; 
+  }
+}
+.cinicon-4-line {
+  &:before {
+    content: $cinicon-4-line; 
+  }
+}
+.cinicon-5-line {
+  &:before {
+    content: $cinicon-5-line; 
+  }
+}
+.cinicon-1-minus {
+  &:before {
+    content: $cinicon-1-minus; 
+  }
+}
+.cinicon-2-minus {
+  &:before {
+    content: $cinicon-2-minus; 
+  }
+}
+.cinicon-3-minus {
+  &:before {
+    content: $cinicon-3-minus; 
+  }
+}
+.cinicon-4-minus {
+  &:before {
+    content: $cinicon-4-minus; 
+  }
+}
+.cinicon-5-minus {
+  &:before {
+    content: $cinicon-5-minus; 
+  }
+}
+.cinicon-1-plus {
+  &:before {
+    content: $cinicon-1-plus; 
+  }
+}
+.cinicon-2-plus {
+  &:before {
+    content: $cinicon-2-plus; 
+  }
+}
+.cinicon-3-plus {
+  &:before {
+    content: $cinicon-3-plus; 
+  }
+}
+.cinicon-4-plus {
+  &:before {
+    content: $cinicon-4-plus; 
+  }
+}
+.cinicon-5-plus {
+  &:before {
+    content: $cinicon-5-plus; 
+  }
+}
+.cinicon-1-cross {
+  &:before {
+    content: $cinicon-1-cross; 
+  }
+}
+.cinicon-2-cross {
+  &:before {
+    content: $cinicon-2-cross; 
+  }
+}
+.cinicon-3-cross {
+  &:before {
+    content: $cinicon-3-cross; 
+  }
+}
+.cinicon-4-cross {
+  &:before {
+    content: $cinicon-4-cross; 
+  }
+}
+.cinicon-5-cross {
+  &:before {
+    content: $cinicon-5-cross; 
+  }
+}
+

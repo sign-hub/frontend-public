@@ -1,0 +1,97 @@
+<mat-sidenav-container class="sidenav-container" [class.is-mobile]="customMobileQuery.mobileQuery.matches">
+  <mat-sidenav #drawer [mode]="customMobileQuery.mobileQuery.matches ? 'over' : 'side'" [(opened)]="opened"
+    role="navigation" [disableClose]="false">
+    <!--
+    <mat-card>
+
+    <mat-card-title><h2>
+      In this section
+    </h2></mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+    -->
+    <mat-nav-list class="mat-no-padding">
+      <h3 class="header-content" color="primary">
+        In this section
+      </h3>
+      <a mat-list-item routerLink='welcome-page-assessment'>
+        <mat-icon matListIcon color="primary">stop</mat-icon>
+        <div matLine>
+          <h5>HOME</h5>
+        </div>
+        <p class="text-justify" matLine>
+        </p>
+        <div matLine>
+          <mat-chip>View</mat-chip>
+        </div>
+      </a>
+      <mat-divider></mat-divider>
+      <a mat-list-item routerLink='lis'>
+        <mat-icon matListIcon color="primary">stop</mat-icon>
+        <div matLine>
+          <h5>LIS</h5>
+        </div>
+        <p class="text-justify" matLine>
+        </p>
+        <div matLine>
+          <mat-chip>View</mat-chip>
+        </div>
+      </a>
+      <mat-divider></mat-divider>
+      <a mat-list-item routerLink='lsf'>
+        <mat-icon matListIcon color="primary">stop</mat-icon>
+        <div matLine>
+          <h5>LSF</h5>
+        </div>
+        <p class="text-justify" matLine>
+        </p>
+
+        <div matLine>
+          <mat-chip>View</mat-chip>
+        </div>
+
+      </a>
+      <mat-divider></mat-divider>
+      <a mat-list-item routerLink='lse'>
+        <mat-icon matListIcon color="primary">stop</mat-icon>
+        <div matLine>
+          <h5>LSE</h5>
+        </div>
+        <p class="text-justify" matLine>
+        </p>
+
+        <div matLine>
+          <mat-chip>View</mat-chip>
+        </div>
+      </a>
+      <mat-divider></mat-divider>
+      <a mat-list-item routerLink='lsc'>
+        <mat-icon matListIcon color="primary">stop</mat-icon>
+        <div matLine>
+          <h5>LSC</h5>
+        </div>
+        <p class="text-justify" matLine>
+        </p>
+
+        <div matLine>
+          <mat-chip>View</mat-chip>
+        </div>
+      </a>
+    </mat-nav-list>
+    <!--
+      LSE/LSC
+    </mat-card-content>
+
+  </mat-card>-->
+
+  </mat-sidenav>
+  <mat-sidenav-content class="container-content">
+    <main id="atlas-section">
+      <a mat-button (click)="toggleSidenav()">
+        <mat-icon matListIcon *ngIf="opened">menu_open</mat-icon>
+        <mat-icon matListIcon *ngIf="!opened">menu</mat-icon>
+      </a>
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

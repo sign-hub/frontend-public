@@ -1,0 +1,45 @@
+<div class="container-content">
+  <a mat-button (click)="toggleSidenav()">
+    <mat-icon matListIcon *ngIf="opened">menu_open</mat-icon>
+    <mat-icon matListIcon *ngIf="!opened">list</mat-icon>
+  </a>
+  <div class="grid-content" *ngIf="isGrid">
+    <div class="item col-12 px-2 col-md-4" *ngFor="let item of filteredData; let i = index"
+      (click)="goToVideoDetails(i)">
+      <div class="img-wrapper mat-elevation-z2 mat-margin-bottom">
+        <img class="img-fluid" [src]="item.thumb" alt="{{item.name}} thumbnail" width="250" />
+        <span class="time">15:00</span>
+      </div>
+      <div class="details">
+        <h3 class="item-name mat-h3">{{ item.name }}</h3>
+        <p class="datetime">{{ item.date }}</p>
+      </div>
+    </div>
+  </div>
+  <mat-list class="list-content" *ngIf="!isGrid">
+    <div class="item" *ngFor="let item of filteredData; let i = index">
+      <div class="img-wrapper">
+        <img src="{{ item.thumb }}" alt="{{item.name}} thumbnail" (click)="goToVideoDetails(i)" />
+        <span class="time">15:00</span>
+      </div>
+      <div class="details">
+        <div class="info">
+          <p class="name">{{ item.name }}</p>
+          <p class="datetime">published on {{ item.date }}</p>
+          <p class="autor-name">autor name</p>
+          <p class="description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Pellentesque lobortis lobortis augue. Donec ullamcorper lorem ac
+            augue fermentum laoreet. Curabitur et viverra metus.
+          </p>
+        </div>
+
+        <!-- <div class="play-btn">
+          <a (click)="goToVideoDetails(i)" arial-label="go to video ">
+            <mat-icon matSuffix>play_arrow</mat-icon>
+          </a>
+        </div> -->
+      </div>
+    </div>
+  </mat-list>
+</div>

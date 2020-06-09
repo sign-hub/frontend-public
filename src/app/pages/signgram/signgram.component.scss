@@ -1,0 +1,26 @@
+@import "../../../variables";
+
+.mat-card {
+  border-radius: 0;
+  margin-bottom: 2px;
+  .mat-card-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 0;
+  }
+}
+
+.filter {
+  padding: 20px;
+  display: flex;
+  align-items: flex-end;
+}
+.input-rounded {
+  font-size: 14px;
+  font-family: "Roboto";
+}
+
+::ng-deep .mat-tooltip {
+  position: relative !important;
+  margin-left: 300px !important;
+}

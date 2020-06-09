@@ -1,0 +1,16 @@
+@import '../../../variables.scss';
+.main-container{
+  background: #E8E8E8;
+  height: 100%;
+  .connect-content{
+    max-width: 1040px;
+    margin: auto;
+    background: map-get($cini-colors, color-white);
+    height: 100%;
+    padding: 0px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}

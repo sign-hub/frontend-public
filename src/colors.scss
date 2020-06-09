@@ -1,0 +1,25 @@
+.mat-icon{
+    &.mat-tertiray{
+        color:var(--tertiary);
+    }
+    &.mat-secondary{
+        color:var(--secondary);
+    }
+}
+
+.mat-fab,
+.mat-flat-button,
+.mat-mini-fab,
+.mat-raised-button,
+.mat-button,
+.mat-icon-button {
+    
+    &.mat-action{
+    background-color: var(--color-action);
+    color: #fff; 
+    }
+    &.mat-highlight{
+    background-color: var(--color-highlight);
+    color: rgba(0, 0, 0, 0.87); 
+    }
+}

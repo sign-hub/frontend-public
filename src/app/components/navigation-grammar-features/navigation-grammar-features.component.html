@@ -1,0 +1,391 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer mode="side" [(opened)]="opened" role="navigation" [disableClose]="true">
+    <mat-nav-list style="padding-top: 0px!important;">
+      <div class="left-side-nav">
+        <div class="top">
+          <div class="header-content" color="color-violet">
+            Features
+          </div>
+          <div *ngIf="error" class="alert alert-danger" role="alert">
+            <div class="text-center">Ops..Something went Wrong , Please try later!<br>
+              Error {{errorMsg.status}}<br>
+              {{errorMsg.statusText}}
+            </div>
+          </div>
+          <div class="body-content" *ngIf="!error">
+
+            <mat-expansion-panel [expanded]="step === 0" expanded>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <mat-icon matSuffix>format_list_bulleted</mat-icon> Table of content
+                </mat-panel-title>
+
+              </mat-expansion-panel-header>
+
+              <div class="content">
+
+
+                <div class="selected-features top">
+
+                  <h4 class="selected-feature-title">
+                    Navigate through the TOC tree
+
+                    <div class="info-btn">
+                      <img src="../../../assets/image/info.png" alt="info-icon" class="info-not-active" />
+                      <img src="../../../assets/image/active-tooltip.png" alt="tooltip" matTooltip="Navigate through the TOC tree and select one or more
+                          features to reveal on map. Select up to three features to
+                          combine results." class="info-active">
+                    </div>
+                  </h4>
+
+                </div>
+
+                <div class="bottom custom-scrollbar">
+                  <form method="get">
+                    <div class="filter-container">
+                      <input *ngIf="notOnlyFeatures" matInput placeholder="Search in All tree"
+                        (input)="filterChanged($event.target.value, true)" class="input-rounded" />
+                      <input *ngIf="!notOnlyFeatures" matInput placeholder="Search by features"
+                        (input)="filterChanged($event.target.value, false)" class="input-rounded" />
+                      <button mat-icon-button [matMenuTriggerFor]="menu" color="action" class="double-icons filters"
+                        aria-label="sort results">
+                        <mat-icon matSuffix matTooltip="Perform search in all tree or only features"
+                          matTooltipPosition="above">
+                          search arrow_drop_down </mat-icon>
+                      </button>
+                      <mat-menu #menu="matMenu">
+                        <div class="header-filters">Search by</div>
+                        <button mat-menu-item (click)="notOnlyFeaturesToggle()" [disabled]="notOnlyFeatures"
+                          aria-label="search by All">
+                          <mat-icon matSuffix color="dark">text_fields</mat-icon> All tree
+                        </button>
+                        <button mat-menu-item (click)="notOnlyFeaturesToggle()" [disabled]="!notOnlyFeatures"
+                          aria-label="search by Features">
+                          <mat-icon matSuffix color="dark">flag</mat-icon> Features
+                        </button>
+                      </mat-menu>
+                    </div>
+                    <div class="tree">
+
+                      <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+                        <div class="parent-node"></div>
+                        <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+                          <button mat-icon-button disabled></button>
+                          <span *ngIf="node.idFeature === undefined">{{node.item}}</span>
+                          <div *ngIf="node.idFeature !== undefined">
+                            <mat-checkbox class="checklist-leaf-node" [checked]="checklistSelection.isSelected(node)"
+                              (change)="tocLeafItemSelectionToggle(node)" [disabled]="checkDisabled(node)">
+                              {{ node.item }}
+                            </mat-checkbox>
+                          </div>
+                        </mat-tree-node>
+                        <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+                          <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.filename">
+                            <mat-icon class="mat-icon-rtl-mirror">
+                              {{ treeControl.isExpanded(node) ? "expand_more" : "chevron_right" }}
+                            </mat-icon>
+                          </button>
+
+                          <span *ngIf="!node.feature">{{node.item}}</span>
+                          <div *ngIf="node.feature">
+                            <mat-checkbox [checked]="descendantsAllSelected(node)"
+                              [indeterminate]="descendantsPartiallySelected(node)"
+                              (change)="tocItemSelectionToggle(node)" [disabled]="checkDisableParent(node)">
+                              {{ node.item }}
+                            </mat-checkbox>
+                          </div>
+                        </mat-tree-node>
+                      </mat-tree>
+                    </div>
+                    <button mat-icon-button class="submit-btn" [style.opacity]=checkSubmit (click)="OnSubmit()"
+                      [ngClass]="isChecked ? 'isChecked' : ''" [disabled]="!isChecked" aria-label="submit">
+                      <mat-icon matSuffix>done</mat-icon>
+                      <span *ngIf="isChecked">Submit</span>
+                    </button>
+                  </form>
+
+                </div>
+              </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel [expanded]="step === 1" [hideToggle]="step != 1" [disabled]="step != 1">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <mat-icon matSuffix class="icon-relations">radio_button_unchecked radio_button_unchecked</mat-icon>
+                  <!-- <img src="../../../assets/image/relations.png" alt="relations" /> -->
+                  Relations
+                </mat-panel-title>
+                <mat-panel-description>
+                  <!-- <mat-icon matSuffix  >mode_edit</mat-icon> -->
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+
+              <div class="selected-features top">
+
+                <h4 class="selected-feature-title">
+                  Features selected
+
+                  <div class="info-btn">
+                    <img src="../../../assets/image/info.png" alt="info-icon" class="info-not-active" />
+                    <img src="../../../assets/image/active-tooltip.png" alt="tooltip"
+                      matTooltip="Feature marked as data based on personal estimate" class="info-active">
+                  </div>
+                </h4>
+                <div class="ordered-list">
+                  <ol>
+                    <li *ngFor="let featSel of featureSelected">{{featSel.name}}</li>
+                  </ol>
+                </div>
+              </div>
+
+              <div class="filter">
+                <input placeholder="Type at least 3 characters" (input)="filterChanged($event.target.value)"
+                  class="input-rounded" />
+              </div>
+              <div class="accordions" *ngFor="let relation of relation">
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header [collapsedHeight]="auto">
+                    <mat-panel-title class="icon-left">
+                      <span class='cinicon' style.color={{relation.icon.color}}>{{relation.icon.text}}</span>
+                      <div class="header-list">
+                        <ol>
+                          <li *ngFor="let relation of relation.options">
+                            {{relation.value ? relation.value.valueName : relation.name}}</li>
+                        </ol>
+                      </div>
+                      <!--<div class="header-list">
+                        <ol>
+                          <li>Used lexical function</li>
+                          <li>Used Both function</li>
+                        </ol>
+                      </div>-->
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      <div class="circle-number">
+                        {{relation.languages.length}}
+                      </div>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div class="inner-content">
+                    <div class="inner-list" *ngFor="let language of relation.languages">
+                      <mat-icon matSuffix>place</mat-icon>
+                      <span style="cursor: pointer;"
+                        (click)="languageDetail(language.id)">{{language.name}}({{language.code}})</span>
+                    </div>
+                    <div class="inner-list" *ngIf="relation.languages.length==0">
+                      <mat-icon matSuffix>place</mat-icon>
+                      <span>There Are no languages for theese options</span>
+                    </div>
+                  </div>
+                </mat-expansion-panel>
+              </div>
+            </mat-expansion-panel>
+          </div>
+        </div>
+      </div>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-grammar-feature [changeSome]="changeSome"></app-grammar-feature>
+    <!-- <router-outlet ></router-outlet> -->
+    <div class="toggleSidenav" (click)="drawer.toggle()">
+      <mat-icon>chevron_right</mat-icon>
+    </div>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+
+
+<!-- RELATIONS STATICHE -->
+<!-- <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <div class="img-wrapper">
+                        <img
+                          src="../../../assets/image/feature-relations/shape-two.png"
+                          alt="shape"
+                        />
+                      </div>
+                      <div class="header-list">
+                        <ol >
+                          <li>Used lexical function</li>
+                          <li>Used unknown function</li>
+                        </ol>
+                      </div>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      <div class="circle-number">
+                        9
+                      </div>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <div class="img-wrapper">
+                          <img
+                            src="../../../assets/image/feature-relations/shape-three.png"
+                            alt="shape"
+                          />
+                        </div>
+                      <div class="header-list">
+                        <ol>
+                          <li>Used lexical function</li>
+                          <li>Used Both function</li>
+                        </ol>
+                      </div>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      <div class="circle-number">
+                        12
+                      </div>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <div class="img-wrapper">
+                          <img
+                            src="../../../assets/image/feature-relations/shape-four.png"
+                            alt="shape"
+                          />
+                        </div>
+                      <div class="header-list">
+                        <ol>
+                          <li>Used lexical function</li>
+                          <li>Not used</li>
+                        </ol>
+                      </div>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      <div class="circle-number">
+                        2
+                      </div>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <div class="img-wrapper">
+                          <img
+                            src="../../../assets/image/feature-relations/shape-five.png"
+                            alt="shape"
+                          />
+                        </div>
+                      <div class="header-list">
+                        <ol>
+                          <li>Used non lexical function</li>
+                          <li>Used Both function</li>
+                        </ol>
+                      </div>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      <div class="circle-number">
+                        12
+                      </div>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <div class="img-wrapper">
+                          <img
+                            src="../../../assets/image/feature-relations/shape-six.png"
+                            alt="shape"
+                          />
+                        </div>
+                      <div class="header-list">
+                        <ol>
+                          <li>Used non lexical function</li>
+                          <li>Used unknown function</li>
+                        </ol>
+                      </div>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      <div class="circle-number">
+                        2
+                      </div>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <div class="img-wrapper">
+                          <img
+                            src="../../../assets/image/feature-relations/shape-seven.png"
+                            alt="shape"
+                          />
+                        </div>
+                      <div class="header-list">
+                        <ol>
+                          <li>Used non lexical function</li>
+                          <li>Not used</li>
+                        </ol>
+                      </div>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      <div class="circle-number">
+                        12
+                      </div>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <div class="img-wrapper">
+                          <img
+                            src="../../../assets/image/feature-relations/shape-eight.png"
+                            alt="shape"
+                          />
+                        </div>
+                      <div class="header-list">
+                        <ol>
+                          <li>Not used</li>
+                          <li>Used Both function</li>
+                        </ol>
+                      </div>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      <div class="circle-number">
+                        2
+                      </div>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <div class="img-wrapper">
+                          <img
+                            src="../../../assets/image/feature-relations/shape-nine.png"
+                            alt="shape"
+                          />
+                        </div>
+                      <div class="header-list">
+                        <ol>
+                          <li>Not used</li>
+                          <li>Used unknown function</li>
+                        </ol>
+                      </div>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      <div class="circle-number">
+                        12
+                      </div>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                </mat-expansion-panel>-->
+<!--FINE RELATIONS STATICHE-->

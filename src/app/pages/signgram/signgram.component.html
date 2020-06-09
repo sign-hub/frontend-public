@@ -1,0 +1,111 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer mode="side" [(opened)]="opened" role="navigation" [disableClose]="true">
+
+    <div class="filter">
+
+      <input placeholder="Type at least 3 characters" [(ngModel)]="termSearched" class="input-rounded" />
+      <button mat-icon-button [matMenuTriggerFor]="menu" color="action" class="double-icons filters button-menu-sign"
+        aria-label="sort results">
+        <mat-icon matSuffix matTooltip="Perform search by term or code" matTooltipPosition="above">search
+          arrow_drop_down </mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <div class="header-filters">Search by</div>
+        <button mat-menu-item (click)="filterChanged('grammarName')" [disabled]="grammarNameDisabled"
+          aria-label="search by grammarName">
+          <mat-icon matSuffix color="dark">text_fields</mat-icon> Terms
+        </button>
+        <button mat-menu-item (click)="filterChanged('slCode')" [disabled]="slCodeDisabled" aria-label="search by code">
+          <mat-icon matSuffix color="dark">flag</mat-icon> SL Code
+        </button>
+      </mat-menu>
+
+    </div>
+
+    <mat-card
+      *ngFor="let grammar of grammars | filterlist:(termSearched && termSearched.length>2) ? termSearched : null  : this.what : this.whatOb">
+      <mat-card-header>
+        <div mat-card-avatar>
+          <mat-icon>stop</mat-icon>
+        </div>
+        <mat-card-title (click)='openGrammar(grammar)'>
+          <h3 class="mat-link-item">{{grammar.grammarName}}</h3>
+        </mat-card-title>
+        <mat-card-subtitle>Loren ipsum abstract</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-actions>
+        <!-- <button mat-flat-button class="mat-round" (click)='openGrammar(grammar)'>views</button> -->
+        <button mat-mini-fab color="action" matTooltip="Download this grammar" matTooltipPosition="before"
+          aria-label="click to download this grammar">
+          <mat-icon aria-label="download grammar">cloud_download</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+
+    <main id="page-{{pageTitle}}" class="container-content">
+      <a mat-button (click)="toggleSidenav()">
+        <mat-icon matListIcon *ngIf="opened">menu_open</mat-icon>
+        <mat-icon matListIcon *ngIf="!opened">list</mat-icon>
+      </a>
+
+      <div class="content-header ">
+        <h1 class="title-header">Welcome to the page of SIGN-HUB Sign Language Grammars!</h1>
+        <!-- <h3 class="sub-header">Sub header tie</h3> -->
+      </div>
+
+      <section class="container-body text-justify">
+
+        <!--  <h2 class="title-section">
+          Title section
+        </h2>
+        <h3 class="title-paragraph">
+          Title paragraph
+        </h3>
+        <h4>
+          Title
+        </h4> -->
+        <p>
+          This section of the platform currently hosts the grammars of 7 sign languages: Catalan Sign Language (LSC),
+          French Sign Language (LSF), German Sign Language (DGS), Italian Sign Language (LIS), Sign Language of the
+          Netherlands (NGT), Spanish Sign Language (LSE), and Turkish Sign Language (TİD). You can access these either
+          via the language list or by using the search function on the left panel of the page. You can navigate through
+          the grammars with the help of the ToC but you can also download them as a pdf document.
+        </p>
+        <p>
+          The grammar descriptions provided here differ from each other in terms of the coverage of the linguistic
+          topics, due to the varying availability of the linguistic research results on each language. Thus, those that
+          have a relatively wider coverage are titled as “A Grammar of …” whereas those with a narrower coverage are
+          titled as “Topics in the Grammar of …”.
+        </p>
+        <p>
+          These grammars were written by the researchers in the <a routerLink="project">SIGN-HUB project</a> following
+          the guidance provided in the<a routerLink="#"> SignGram Blueprint</a> and are based on both the linguistics
+          literature that was available as well as original
+          research done during the project.
+        </p>
+        <p>
+          We hope that local spoken language and sign language versions of these existing grammars or of new grammars
+          will be available in the future.
+        </p>
+        <p>
+          These grammars are by no means exhaustive and they should be viewed as works in progress. We welcome new sign
+          language grammars and further contributions to existing grammars. This future work will be facilitated by the
+          online grammar writing tool developed by the SIGN-HUB project. This tool enables the writers to insert and
+          edit content (text and visual examples) under each heading in the Table of Contents and is designed in such a
+          way that once all content is provided by the writers, it can automatically be displayed as a digital grammar
+          in the series.
+          Please <a routerLink="/contacts">contact</a> us for more information on this procedure.
+        </p>
+        <p>
+          Now, please “click” on one of the grammars and start exploring the intriguing world of sign languages!
+        </p>
+
+
+      </section>
+
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,158 @@
+<mat-sidenav-container class="sidenav-container sign-language">
+  <mat-sidenav #drawer mode="side" opened role="navigation" [disableClose]="false">
+    <mat-nav-list>
+      <div *ngIf="error" class="alert alert-danger" role="alert">
+        <div class="text-center">Ops..Something went Wrong , Please try later!<br>
+          Error {{errorMsg.status}}<br>
+          {{errorMsg.statusText}}
+        </div>
+      </div>
+      <div class="left-side-nav" *ngIf="!error">
+        <div class="top">
+          <div class="header-content">
+            Sign language
+          </div>
+          <div class="body-content">
+
+            <h4 class="selected-feature-title">
+              Navigate through the Sign Language Locations
+              <div class="info-btn">
+                <img src="../../../assets/image/info.png" alt="info-icon" class="info-not-active" />
+                <img src="../../../assets/image/active-tooltip.png" alt="tooltip"
+                  matTooltip="Navigate through the Sign locations tree and select one for details" class="info-active">
+              </div>
+            </h4>
+          </div>
+        </div>
+        <div class="filters mat-padding">
+          <div *ngIf="termsDisabled" class="search-bar">
+            <input placeholder="Type at least 3 characters" (input)="setFilteredData()" [(ngModel)]="searchTerm" />
+            <!-- <button mat-button (click)="refreshSearch()" class="search-btn">
+              <mat-icon matSuffix>text_fields</mat-icon>
+            </button> -->
+          </div>
+          <div *ngIf="slCodeDisabled" class="search-bar">
+            <input placeholder="Search by code" (input)="setFilteredDataByCode()" [(ngModel)]="searchTerm" />
+            <!-- <button mat-button (click)="refreshSearch()" class="search-btn">
+              <mat-icon matSuffix>flag</mat-icon>
+            </button> -->
+          </div>
+          <div *ngIf="countriesDisabled" class="search-bar">
+            <input placeholder="Search by countries" (input)="setFilteredDataByCountries()" [(ngModel)]="searchTerm" />
+            <!-- <button mat-button (click)="refreshSearch()" class="search-btn">
+              <mat-icon matSuffix>flag</mat-icon>
+            </button> -->
+          </div>
+          <div *ngIf="macroAreaDisabled">
+            <mat-form-field>
+              <mat-label>Select macroarea</mat-label>
+              <mat-select [formControl]="macroAreas" multiple (selectionChange)="setFilterByMacroArea($event.value)">
+                <mat-option *ngFor="let macroArea of macroAreaList" [value]="macroArea">{{macroArea}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </div>
+
+          <button mat-icon-button [matMenuTriggerFor]="menu" color="action" class="double-icons filters"
+            aria-label="sort results">
+            <mat-icon matSuffix>search arrow_drop_down </mat-icon>
+          </button>
+          <mat-menu #menu="matMenu" xPosition="before" class="menu-filters">
+            <div class="header-filters">Search by</div>
+            <button mat-menu-item (click)="refreshSearch('terms')" [disabled]="termsDisabled"
+              aria-label="sort by terms">
+              <mat-icon matSuffix color="dark">text_fields</mat-icon> Terms
+            </button>
+            <button mat-menu-item (click)="refreshSearch('slCode')" aria-label="sort by slcode"
+              [disabled]="slCodeDisabled">
+              <mat-icon matSuffix color="dark">code</mat-icon> SL Code
+            </button>
+            <button mat-menu-item (click)="refreshSearch('countries')" aria-label="sort by country"
+              [disabled]="countriesDisabled">
+              <mat-icon matSuffix color="dark">edit_location</mat-icon> Countries
+            </button>
+            <button mat-menu-item (click)="refreshSearch('macroarea')" aria-label="sort by macro-area"
+              [disabled]="macroAreaDisabled">
+              <mat-icon matSuffix color="dark">map</mat-icon> Macro-areas
+            </button>
+          </mat-menu>
+
+          <button mat-icon-button color="action" aria-label="sort results"
+            (click)="code ? toggleCodeAscDesc() : toggleAscDesc()">
+            <mat-icon matSuffix [class.unsort]="code ? sortedValueCode : sortedValue">sort </mat-icon>
+          </button>
+
+
+
+
+          <!-- <div class="sort">
+            <div class="dropdown">
+
+              <div class="button-wrapper">
+                <mat-icon matSuffix>search</mat-icon>
+                <button (click)="showSearchDropdown()" class="dropbtn" >
+                  <mat-icon matSuffix>arrow_drop_down</mat-icon>
+                </button>
+
+              </div>
+              <div id="mySearchDropdown" class="dropdown-content" *ngIf="toggleSearchDropdown" >
+                <div class="header-filters">Search by</div>
+
+                <button mat-button (click)="refreshSearch()" [disabled]="!code">
+                  <mat-icon matSuffix color="dark" >text_fields</mat-icon> Terms
+                </button>
+                <button mat-button (click)="refreshSearch()" [disabled]="code">
+                  <mat-icon matSuffix color="dark" >flag</mat-icon> SL Code
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="sort">
+            <div class="dropdown">
+
+              <div class="button-wrapper">
+                <mat-icon matSuffix>sort</mat-icon>
+                <button (click)="showDropdown()" class="dropbtn" #toggleButton>
+                  <mat-icon matSuffix>arrow_drop_down</mat-icon>
+                </button>
+
+              </div>
+              <div id="myDropdown" class="dropdown-content" *ngIf="toggleDropdown" #menu>
+                <div class="header-filters">Order by</div>
+                <button mat-button (click)="sortByName()">
+                  <mat-icon matSuffix color="dark" [class.unsort]="orderName">sort</mat-icon> Alphabet
+                </button>
+                <button mat-button (click)="sortByCode()">
+                  <mat-icon matSuffix color="dark" [class.unsort]="orderCode">sort</mat-icon> SL Code
+                </button>
+              </div>
+            </div>
+          </div> -->
+
+
+
+        </div>
+
+
+
+
+        <!--ORDINAMENTO-->
+        <mat-list role="list" class="country-list custom-scrollbar">
+          <mat-list-item role="listitem" *ngFor="let country of filteredData; let i = index;"
+            [class.is-active]="country.isActive == true" (click)="openCountry(i,country.uuid)"
+            [ngClass]="code == true ? 'order-code' : 'order-name'">
+            <span class="sl-name">{{ country.name }}</span><span class="sl-code">({{country.code}})</span>
+            <img *ngIf="country.isActive == true" src="../../../assets/image/arrow-right-white.png" alt="arrow-right">
+          </mat-list-item>
+        </mat-list>
+        <!--ORDINAMENTO-->
+
+
+      </div>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

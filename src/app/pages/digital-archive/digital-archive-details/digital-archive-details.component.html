@@ -1,0 +1,53 @@
+<div class="digital-archive-details" *ngIf="!isEmpty">
+  <div class="video-content">
+    <div>
+      <button class="opacity">
+        <a routerLink="/digital-archive">
+          <i class="material-icons md-36">arrow_back</i>
+        </a>
+      </button>
+    </div>
+    <vg-player width="100%" height="300px" *ngIf="videoSrc">
+      <video controls preload="auto" #videoTest>
+        <source src="{{videoSrc}}" type="video/mp4" *ngIf="videoSrc">
+        <!-- <track kind="subtitles" label="English" src="http://static.videogular.com/assets/subs/pale-blue-dot.vtt" srclang="en" default>
+              <track kind="subtitles" label="Español" src="http://static.videogular.com/assets/subs/pale-blue-dot-es.vtt" srclang="es"> -->
+      </video>
+    </vg-player>
+  </div>
+  <div class="video-details">
+    <div class="header-content">
+      {{videoName}}
+      <!-- <button mat-button (click)="downloadFile(videoSrc,originalName)">
+        <mat-icon>cloud_download</mat-icon>
+      </button> -->
+    </div>
+    <div class="body-content">
+      <ul>
+        <li class="sr-only">Original file name : <strong>{{ originalName }}</strong></li>
+        <li>Video format : <strong>{{ videoFormat }}</strong></li>
+        <li>File size : <strong>{{ fileSize }}</strong></li>
+        <li>Published on : <strong>{{ pubblicationdate | date }}</strong></li>
+        <li>Author name : <strong>{{ authorName }}</strong> </li>
+      </ul>
+
+      <mat-divider></mat-divider>
+      <div class="bottom latest-videos mat-padding">
+        <div class="bottom-content item item-wrapped" *ngFor="let video of latestVideos; let i = index;">
+          <div class="img-wrapper mat-no-padding mat-margin-bottom">
+            <img src="{{ video.thumb }}" alt="{{ video.name }}" (click)="playVideo(video.name)"
+              class="mat-elevation-z2" />
+            <span class="time">{{ video.minutes }} {{ video.minutes }}</span>
+          </div>
+          <div class="video-details ">
+            <h2 class="item-name">{{ video.name }}</h2>
+            <p class="datetime">{{video.modification | date}}</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+<div *ngIf="isEmpty">empty results</div>

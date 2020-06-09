@@ -1,0 +1,65 @@
+@import '../../../variables.scss';
+
+.main-container{
+  background: #E8E8E8;
+  height: 100%;
+  .contact-content{
+    max-width: 1040px;
+    margin: auto;
+    background: map-get($cini-colors, color-white);
+    height: 100%;
+    padding: 0px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .contact-form{
+    margin-top: 50px;
+  }
+
+
+  form{
+    display: flex;
+    flex-wrap: wrap;
+    .cols{
+      flex: 1 0 45%;
+
+      mat-form-field{
+        width: 95%;
+
+      }
+    }
+
+    .full-width-col{
+      width: 100%;
+
+      mat-form-field{
+        width: 98%;
+      }
+    }
+
+    .btn-wrapper{
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+      padding-right: 20px;
+    }
+
+    .register-btn{
+      background: map-get($cini-colors, color-green);
+      border-radius: 24px;
+      height: 40px;
+      color: map-get($cini-colors, color-white);
+      min-width: 200px;
+      margin-top: 15px;
+    }
+  }
+}
+
+
+mat-error{
+  margin-top: -20px;
+  font-size: 12px;
+}

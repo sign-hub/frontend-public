@@ -1,0 +1,30 @@
+@import 'variables';
+@mixin icon-round {
+    border-radius: 100%;
+    width: 1.667em;
+    height: 1.667em;
+    line-height: 1.667em !important;
+  }
+
+@mixin gradient($color){
+    background: $color;
+    color: white;
+    background: linear-gradient(to right,rgba($color, 1) 0%,rgba($color, 0.53) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{color}', endColorstr='#{color}',GradientType=1 ); /* IE6-9 */
+  }
+
+  @mixin input-rounded{
+    height: 42px;
+    border: 1px solid map-get($cini-colors, color-border-light);
+    padding-left: 10px;
+    font-size: 14px;
+    max-width: 100%;
+    width: 100%;
+    border-radius:map-get($cini-sizes, radius-default)*2;
+    &:focus {
+      outline: none;
+    }
+    &::-webkit-input-placeholder {
+      color: rgba(0, 0, 0, 0.38);
+    }
+  }

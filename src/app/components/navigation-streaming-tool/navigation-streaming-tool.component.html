@@ -1,0 +1,60 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer mode="side" [(opened)]="this.controllerDigitalArchive.opened" role="navigation">
+    <mat-nav-list>
+      <div class="left-side-nav">
+        <div class="top">
+          <div class="header-content " color="primary">
+            <h1>Digital archive</h1>
+          </div>
+          <div class="body-content">
+            <div class="streaming-tool top">
+
+              <h4 class="streaming-tool-navigate">
+                Navigate through digital archive
+
+                <div class="info-btn">
+                  <img src="../../../assets/image/info.png" alt="info-icon" class="info-not-active" />
+                  <img src="../../../assets/image/active-tooltip.png" alt="tooltip" matTooltip="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Pellentesque lobortis lobortis augue. Donec ullamcorper lorem ac
+                  augue fermentum laoreet. Curabitur et viverra." class="info-active">
+                </div>
+              </h4>
+            </div>
+          </div>
+        </div>
+        <div class="history-notes mat-padding">
+          <!-- <span>Last uploaded video: gg/mm/aa</span>
+          <span> total videos: {{ totalVideos }}</span> -->
+          <div class="filter">
+            <input *ngIf="!signLanguageLinkParam" class="input-rounded" placeholder="Type at least 3 characters"
+              [(ngModel)]="this.controllerDigitalArchive.searchTerm"
+              (input)="this.controllerDigitalArchive.setFilteredData()">
+            <input *ngIf="signLanguageLinkParam" class="input-rounded" placeholder="Type at least 3 characters"
+              [(ngModel)]="this.controllerDigitalArchive.searchTerm"
+              (input)="this.controllerDigitalArchive.setFilteredData()">
+            <button mat-icon-button [matMenuTriggerFor]="menu" color="action" class="double-icons"
+              aria-label="sort results">
+              <mat-icon matSuffix>sort arrow_drop_down </mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" xPosition="after">
+              <button mat-menu-item (click)="this.controllerDigitalArchive.sortByName()">
+                <mat-icon matSuffix>text_fields</mat-icon> Name
+              </button>
+              <button mat-menu-item (click)="this.controllerDigitalArchive.sortByDate()">
+                <mat-icon matSuffix>calendar_today</mat-icon> Date
+              </button>
+            </mat-menu>
+            <button mat-icon-button (click)="this.controllerDigitalArchive.toggleDisplayMode()"
+              aria-label="toggle view mode" color="action">
+              <mat-icon matSuffix *ngIf="this.controllerDigitalArchive.isGrid">view_module</mat-icon>
+              <mat-icon matSuffix *ngIf="!this.controllerDigitalArchive.isGrid">list</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

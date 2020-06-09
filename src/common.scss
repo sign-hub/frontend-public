@@ -1,0 +1,95 @@
+@import "mixins";
+
+.container-content {
+  background: #ffffff;
+  padding: 20px 30px;
+  // height: 100%;
+  .content-header {
+    margin-bottom: 2.2rem;
+  }
+  .container-body {
+    section,
+    aside {
+      margin-bottom: 1.7rem;
+    }
+  }
+}
+
+[class*="-rounded"] {
+  border-radius: calc(var(--radius-default) * 2);
+}
+
+.unsort {
+  transform: rotateX(180deg);
+}
+
+.mat-card-outline {
+  box-shadow: none !important;
+}
+
+.mat-link-item {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.input-rounded {
+  margin-top: 10px;
+  @include input-rounded;
+}
+.empty-filler {
+  flex: 1 1 auto;
+}
+
+.column {
+  flex-direction: column;
+}
+.icon-relations {
+  letter-spacing: -10px;
+}
+
+button[disabled],
+.mat-button[disabled],
+input[disabled] {
+  opacity: 0.3;
+  cursor: default !important;
+}
+
+button {
+  &.double-icons {
+    border-radius: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 80px;
+    max-width: 80px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.menu-filters {
+  &:before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    right: 0;
+    border-bottom: 10px solid #fff;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    display: block;
+    width: 10px;
+    height: 10px;
+    z-index: 999999;
+    filter: drop-shadow(0px -3px 2px #078239);
+  }
+  .header-filters {
+    padding: 10px;
+    background: darken($color-action, 5%);
+    color: #fff;
+    border-bottom: 1px solid darken(map-get($cini-colors, color-gray), 10%);
+  }
+  .mat-menu-content {
+    padding-top: 0 !important;
+  }
+}

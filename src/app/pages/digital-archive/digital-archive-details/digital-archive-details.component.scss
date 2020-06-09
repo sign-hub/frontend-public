@@ -1,0 +1,143 @@
+@import "../../../../variables.scss";
+
+.digital-archive-details {
+  .video-content {
+    height: 504px;
+    width: 100%;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .video-details {
+    .header-content {
+      height: 140px;
+      background: #f7f7f7;
+      padding-left: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #000;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .body-content {
+      background: map-get($cini-colors, color-white);
+      padding: 15px 20px;
+
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        margin-bottom: 20px;
+
+        li {
+          font-size: 14px;
+          line-height: 21px;
+        }
+      }
+
+      .description {
+        margin-top: 30px;
+        max-width: 30%;
+        font-size: 14px;
+        line-height: 21px;
+      }
+    }
+  }
+}
+
+.latest-videos {
+  .item {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    flex-wrap: wrap;
+    .img-wrapper {
+      max-width: 150px;
+
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+    }
+
+    .video-details {
+      display: flex;
+      flex-direction: column;
+
+      .item-name {
+        font-size: 1rem;
+        // overflow: hidden;
+        // text-overflow: ellipsis;
+        // max-width: 22ch;
+        // display: inline-block;
+        // margin-bottom: 10px;
+        // white-space: normal;
+      }
+    }
+    .name {
+      margin: 0;
+      font-size: 24px;
+      line-height: 21px;
+      word-break: break-all;
+    }
+    .datetime {
+      margin: 0;
+    }
+
+    .img-wrapper {
+      position: relative;
+    }
+    .time {
+      font-size: 11px;
+      position: absolute;
+      min-width: 40px;
+      width: auto;
+      background: #000000;
+      color: white;
+      display: flex;
+      justify-content: center;
+      right: 15px;
+      bottom: 15px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      font-weight: bold;
+    }
+  }
+}
+
+video {
+  width: 100%;
+}
+
+button.opacity {
+  border: 0;
+  background-color: transparent !important;
+  border-radius: 5px;
+  width: 68px !important;
+  margin-left: -2px;
+  a {
+    i.material-icons.md-36 {
+      padding: 5px;
+    }
+  }
+}
+
+button.opacity :hover {
+  border: 0;
+  background-color: rgba(160, 160, 160, 0.1);
+  border-radius: 5px;
+  width: 68px !important;
+  margin-left: -2px;
+  a {
+    text-decoration: none;
+    background-color: transparent;
+    i.material-icons.md-36 {
+      padding: 5px;
+    }
+  }
+}

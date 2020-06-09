@@ -1,0 +1,14 @@
+@import '~@angular/material/theming';
+
+// Create a config with the default typography levels.
+$config: mat-typography-config(
+    $font-family: 'Roboto, monospace',
+    $headline: mat-typography-level(32px, 48px, 700),
+    $body-1: mat-typography-level(16px, 24px, 500)
+);
+
+// Custom header that uses only the Material `font-size` and `font-family`.
+.title-header {
+  font-size: mat-font-size($config, headline);
+  font-family: mat-font-family($config);
+}

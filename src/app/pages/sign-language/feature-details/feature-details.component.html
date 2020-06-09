@@ -1,0 +1,156 @@
+<div class="feature-details-main">
+  <div class="row">
+    <div class="col-md-11">
+      <h1 *ngIf="(LanguageDetail | json) != ({} | json)">
+        {{ LanguageDetail['response'].name }} ({{ LanguageDetail['response'].code}})</h1>
+    </div>
+    <div class="col-md-1 text-right mat-padding-top">
+      <a mat-mini-fab color="warn" class="mat-elevation-z0" aria-label="close feature deteil"
+        routerLink="/sign-language/main">
+        <mat-icon>close</mat-icon>
+      </a>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col">
+      <div class="title-filter">
+        <div class="filters">
+          <div class="search-bar">
+            <!-- <input placeholder="Type at least 3 characters" (input)="filterChanged($event.target.value)"
+              class="input-rounded" /> -->
+            <mat-accordion>
+              <mat-expansion-panel class="mat-elevation-z0" hideToggle>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    List of Features
+                  </mat-panel-title>
+                  <mat-icon>search</mat-icon>
+                </mat-expansion-panel-header>
+
+                <!-- form -->
+                <div class="formFilter">
+                  <div class="checkBoxes">
+                    <mat-checkbox *ngFor="let n of featureList; let i = index" [(ngModel)]="n.checked"
+                      (click)="ifChecked(n)">
+                      {{n[0]}}
+                    </mat-checkbox>
+                  </div>
+                  <mat-form-field>
+                    <input matInput type="search" placeholder="Type at least 3 characters" [(ngModel)]="searchFilter">
+                  </mat-form-field>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+        </div>
+      </div>
+      <div class="body-content">
+        <mat-accordion multi="true">
+          <mat-expansion-panel *ngFor="let f of featureList; let i = index" [expanded]="f.checked"
+            (opened)="f.checked = true" (closed)="f.checked = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{f[0]}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-data-table [data]="f[1]" [filter]="searchFilter"></app-data-table>
+          </mat-expansion-panel>
+        </mat-accordion>
+        <!-- <div class="tree">
+
+          <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+            <div class="parent-node"></div>
+            <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+              <button mat-icon-button disabled></button>
+              {{node.item}}
+
+              {{ node.featureType}}
+              {{node.bluePrintSection}}
+              {{ node.personalJudgment}}
+            </mat-tree-node> -->
+
+        <!-- <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding>
+              <button mat-icon-button disabled></button>
+              <mat-form-field>
+                <input matInput #itemValue placeholder="New item..." />
+              </mat-form-field>
+              <button mat-button class="save-button" (click)="saveNode(node, itemValue.value)">
+                Save
+              </button>
+            </mat-tree-node>  -->
+
+        <!-- <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+              <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.filename">
+                <mat-icon class="mat-icon-rtl-mirror">
+                  {{ treeControl.isExpanded(node) ? "expand_more" : "chevron_right" }}
+                </mat-icon>{{node.item}}
+
+                {{ node.featureType}}
+                {{node.bluePrintSection}}
+                {{ node.personalJudgment}}
+
+              </button> -->
+
+        <!-- <button mat-icon-button (click)="addNewItem(node)"><mat-icon>add</mat-icon></button> -->
+        <!-- </mat-tree-node>
+          </mat-tree>
+        </div> -->
+      </div>
+    </div>
+    <div class="col" col>
+      <div class="title-filter">
+        <h4>Socio-historical background</h4>
+      </div>
+      <div class="body-content">
+        <div class="content-wrapper">
+          <div class="details-wrapper">
+            <h3>The sign language community</h3>
+            <h4>Sign language users:</h4>
+            <p *ngIf="LanguageDetail['response']!= null && LanguageDetail['response'].usersDescription; else elseBlock">
+              {{ LanguageDetail['response'].usersDescription }}</p>
+
+            <h4>Deaf culture:</h4>
+            <p *ngIf="LanguageDetail['response']!= null && LanguageDetail['response'].deafCulture; else elseBlock">
+              {{ LanguageDetail['response'].deafCulture }}</p>
+            <h4>Deaf education:</h4>
+            <p *ngIf="LanguageDetail['response']!= null && LanguageDetail['response'].deafEducation; else elseBlock"
+              [innerHTML]="LanguageDetail['response'].deafEducation">
+            </p>
+            <h4>Status:</h4>
+            <p *ngIf="LanguageDetail['response']!= null && LanguageDetail['response'].status; else elseBlock">
+              {{ LanguageDetail['response'].status }}</p>
+            <h4>Linguistic study:</h4>
+            <p
+              *ngIf="LanguageDetail['response']!= null && LanguageDetail['response'].linguisticStudies; else elseBlock">
+              {{ LanguageDetail['response'].linguisticStudies }}</p>
+            <h4>Author:</h4>
+            <p *ngIf="LanguageDetail['response']!= null && LanguageDetail['response'].author; else elseBlock">
+              {{ LanguageDetail['response'].author }}</p>
+            <br>
+            <ng-template #elseBlock>
+              <p>n/a</p>
+            </ng-template>
+
+          </div>
+          <div class="map-wrapper"
+            *ngIf="LanguageDetail['response']!= null && LanguageDetail['response'].coordinates; else elseBlockMap">
+            <div id="map-s" class="map-feature-detail" style="width: 200px; height: 200px; background: gray">
+            </div>
+            <div #overlayElement id="popup" title="Popup OpenLayers">
+            </div>
+          </div>
+
+          <ng-template #elseBlockMap>
+            <p>n/a</p>
+          </ng-template>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>

@@ -1,0 +1,62 @@
+<div id="map" class="map">
+  <div class="filter-content filter-grammar-features">
+    <div class="filters">
+      <form>
+        <div class="form-content" *ngIf="!Feature">
+          <div class="form-group mat-no-margin mat-padding">
+            <input type="text" readonly placeholder="select feature from TOC">
+          </div>
+        </div>
+        <div class="form-content" *ngIf="Feature">
+          <div class="form-group " *ngFor="let feature of featureSelected,index as i">
+            <div class="feature-selected" readonly *ngIf="featureSelected.length != 0">
+              {{feature.name}}({{feature.options.length}}/{{feature.OptionLength}})</div>
+            <div class="icons">
+              <mat-icon matSuffix *ngIf="submitted">close</mat-icon>
+              <div class="submitted-icons">
+                <div *ngIf="!showCloseButton" class="info-icon-wrapper"
+                  (click)="showInformation(i); $event.stopPropagation()">
+                  <mat-icon matSuffix class="info-icon">info</mat-icon>
+                  <!-- <img src="../../../assets/image/active-icon-info.png" alt="info icon" class="info-active-icon"> -->
+                </div>
+                <div *ngIf="showCloseButton" class="info-icon-wrapper" (click)="closeInformation(i)">
+                  <mat-icon matSuffix>close</mat-icon>
+                </div>
+
+                <div class="info-icon-wrapper" (click)="removeFeature(feature)">
+                  <mat-icon matSuffix>delete</mat-icon>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="vertical-devider"></div>
+        </div>
+      </form>
+      <div class="info-details" *ngIf="showInfo">
+        <div class="form-group-details">
+          <div class="top-breadcrumb">
+            <div class="feature-breadcrumb row mat-no-margin align-center">
+              <span>{{infoFeature.area}}</span> <mat-icon matSuffix>arrow_right</mat-icon>
+              <span>{{infoFeature.name}}</span> <mat-icon matSuffix>arrow_right</mat-icon>
+              <!--<span>Non manuals</span> <span><img src="../../../assets/image/arrow-right.png" alt="arrow"></span>-->
+              <span>{{infoFeature.option}}</span>
+            </div>
+            <div class="view-features">
+              <button mat-button (click)="viewFeature()">View feature</button>
+            </div>
+          </div>
+
+          <mat-divider></mat-divider>
+          <div class="introduction">
+            <h4>Introduction <em>(body abstract or summary)</em></h4>
+            <p>
+              {{infoFeature.description}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div #overlayElement id="popup" title="Popup OpenLayers"></div>

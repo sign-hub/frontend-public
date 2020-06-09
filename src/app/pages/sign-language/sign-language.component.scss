@@ -1,0 +1,39 @@
+@import "../../../variables.scss";
+
+.map {
+  width: calc(100vw - #{map-get($cini-sizes, sidebar-size-condensed)});
+  height: 100%;
+  position: absolute;
+}
+
+#marker {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #088;
+  border-radius: 10px;
+  background-color: #0ff;
+  opacity: 0.5;
+}
+
+.popover {
+  display: inline;
+  padding: 10px;
+  transform: translate(-50%, calc(-100% - 2em));
+  &:after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    margin-left: -5px;
+    border-top: 10px solid #fff;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    filter: drop-shadow(0px 1px 0px rgba(0, 0, 0, 0.4));
+  }
+}
+.popover > div > a {
+  color: blue;
+  cursor: pointer;
+}

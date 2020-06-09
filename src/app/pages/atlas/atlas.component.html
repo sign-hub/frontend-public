@@ -1,0 +1,164 @@
+<mat-sidenav-container class="sidenav-container" [class.is-mobile]="customMobileQuery.mobileQuery.matches">
+  <mat-sidenav #drawer [mode]="customMobileQuery.mobileQuery.matches ? 'over' : 'side'" [(opened)]="opened"
+    role="navigation" [disableClose]="false">
+    <!--
+    <mat-card>
+
+    <mat-card-title><h2>
+      In this section
+    </h2></mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+    -->
+    <mat-nav-list class="mat-no-padding">
+      <h3 class="header-content" color="green">
+        In this section
+      </h3>
+      <a mat-list-item routerLink='/grammar-features'>
+        <mat-icon matListIcon color="tertiary">stop</mat-icon>
+        <div matLine>
+          <h5>Atlas by grammatical features</h5>
+        </div>
+        <p class="text-justify text-smaller" matLine>
+          Here, you can browse the sign languages of the world with regard to their grammatical features and structures.
+          In the Table of Contents (ToC) of this section, you find several grammatical features at the levels of
+          phonology, lexicon, morphology, syntax, and pragmatics. When diving into each linguistic area, you can click
+          on different grammatical features to get a visual map, which shows how this feature is distributed across the
+          sign languages of the world.
+        </p>
+        <div matLine>
+          <mat-chip>View</mat-chip>
+        </div>
+      </a>
+      <mat-divider></mat-divider>
+      <a mat-list-item routerLink='/sign-language'>
+        <mat-icon matListIcon color="secondary">stop</mat-icon>
+        <div matLine>
+          <h5>Atlas by sign languages</h5>
+        </div>
+        <p class="text-justify text-smaller" matLine>
+          Here, you find an alphabetical list of the sign languages of the world and a ‘fact page’ for each sign
+          language. These fact pages include a list of those linguistic features available for the respective sign
+          language. Additionally, you find socio-historical information and the names of the content-providers
+          responsible for this information here.
+        </p>
+
+        <div matLine>
+          <mat-chip>View</mat-chip>
+        </div>
+
+      </a>
+    </mat-nav-list>
+    <!--
+    </mat-card-content>
+
+  </mat-card>-->
+
+  </mat-sidenav>
+  <mat-sidenav-content class="container-content">
+    <main id="atlas-section">
+      <a mat-button (click)="toggleSidenav()">
+        <mat-icon matListIcon *ngIf="opened">menu_open</mat-icon>
+        <mat-icon matListIcon *ngIf="!opened">menu</mat-icon>
+      </a>
+      <div class="content-header ">
+        <h1 class="header-title">Welcome to the page of the Atlas of Sign Language Structures!</h1>
+        <!-- <h3 class="sub-header">Sub header title</h3> -->
+      </div>
+      <section class="container-body text-justify">
+        <!-- <h2 class="title-section">
+            Title section
+          </h2>
+          <h3 class="title-paragraph">
+            Title paragraph
+          </h3>
+          <h4>
+            Title
+          </h4> -->
+        <p>
+          In this area of the platform, you will find linguistic and socio-historical information about the sign
+          languages of the world. These include those sign languages that have been identified and studied so far, but
+          also more under-investigated ones. We know there are many more sign languages in the world that are not
+          sufficiently documented or even not discovered yet.
+        </p>
+        <p>
+          Under “Atlas by grammatical features”, you find maps that visually represent the grammatical properties of the
+          sign languages of the world. Under “Atlas by sign languages”, you find pages with socio-historical information
+          about each individual sign language.
+        </p>
+        <p>
+          The data come from questionnaires answered by sign language researchers and users worldwide. The amount and
+          the quality of the information on each sign language and the number of sign languages represented in the Atlas
+          depended on the availability of information and content-providers for each sign language at the time of
+          creating the Atlas. Thus, the number of grammatical features you will find for a certain sign language gives a
+          clue about the current status of its investigation. The answers for some grammatical features are not based on
+          a documented analysis, but rather on a personal estimation. We have indicated personal estimation responses
+          with a small question mark next to the sign languages’ dot.
+          In the future, we would like to extend the shared knowledge about the sign languages of the world step by
+          step. We want to include as much information for as many sign languages as possible. So, if your sign language
+          is not represented here yet, please <a routerLink="/contacts">contact</a> us.
+        </p>
+        <p>
+          Now, start searching and enjoy exploring the sign languages of the world!<br>
+          <!-- You can download the user manual for atlas: <a href="../../../assets/download/Atlas user manual.pdf"
+            download="Atlas-user-manuals.pdf">Atlas-user-manual</a> -->
+        </p>
+        <!--  <p>
+          Suspendisse in elit ac lorem euismod varius. Proin eros tellus, elementum eu imperdiet at, consequat vitae
+          orci. Integer a turpis ut nibh pharetra dignissim at bibendum odio. Sed gravida arcu ut nulla posuere
+          aliquam. Suspendisse vulputate cursus diam, eu rhoncus justo malesuada non. Aenean pellentesque nisl
+          elementum egestas efficitur. Maecenas et erat et risus bibendum consectetur quis a justo. Fusce fermentum
+          urna turpis, non eleifend tellus faucibus a. Quisque eu nisl ut ligula rutrum maximus eget quis neque. Donec
+          ac posuere ipsum. Curabitur pharetra facilisis euismod. Mauris tincidunt pulvinar dapibus. Mauris vel ligula
+          nec metus dapibus interdum.
+        </p> -->
+      </section>
+
+      <section>
+        <!-- <h4 class="title-section">
+          Title section
+        </h4>
+        <p>
+          Here you can browse the sign languages of the world with regard to their grammatical features and structures.
+          In the Table of Contents (ToC) of this section, you find several grammatical features at the levels of
+          phonology, lexicon, morphology, syntax, and pragmatics. When diving into each linguistic area, you can click
+          on different grammatical features to get a map which shows in a visual way how this feature is distributed
+          across the sign languages of the world.
+        </p>
+        <h5>Title paragraph</h5>
+        <p>
+          Cras ultrices, nunc a sodales consectetur, purus ex luctus leo, a porttitor magna tortor et lectus. Nam et
+          enim at nibh facilisis tempor. Etiam a tellus eget orci ultrices sodales. Proin accumsan, lectus eget
+          rhoncus porta, dui metus vehicula nisl, et aliquet nibh odio sed dolor. Integer eros sem, imperdiet eu
+          faucibus ac, euismod nec enim. Nunc eu odio lobortis, tincidunt orci vel, malesuada dui. Integer volutpat
+          urna at felis condimentum ultrices. Maecenas quis massa lorem. Nulla iaculis pulvinar pellentesque. Mauris
+          et mauris gravida, scelerisque metus sed, efficitur lectus. Pellentesque nec gravida erat. Vivamus magna
+          nisi, vestibulum a nisl in, feugiat maximus velit. Nullam dolor lorem, feugiat sed nunc sed, malesuada
+          ultricies urna. Proin a ex eu lorem ultricies finibus vel ut est.
+        </p>
+        <p>
+          Sed ac elit a elit molestie tincidunt quis vel ex. Nam auctor odio sed tortor sodales posuere. Mauris
+          tristique velit vitae tempus maximus. In non convallis urna. Maecenas eu metus et dui tincidunt finibus. Sed
+          arcu ex, consequat ac pretium eget, iaculis quis nibh. Nulla non maximus odio, quis dignissim dolor.
+        </p>
+        <p>
+          Morbi lorem lorem, iaculis ac mi in, molestie volutpat augue. Maecenas elementum velit ac leo fringilla
+          tempus. Donec laoreet rutrum mauris nec laoreet. Sed sem tellus, lacinia vitae dui quis, blandit interdum
+          urna. Aliquam laoreet ante nec auctor dapibus. Integer lectus dolor, mollis at condimentum ut, convallis sed
+          tortor. Proin efficitur suscipit mauris. Sed imperdiet magna non ultrices lobortis. Donec non iaculis metus,
+          at pretium ipsum.
+        </p>
+        <p>
+          Suspendisse in elit ac lorem euismod varius. Proin eros tellus, elementum eu imperdiet at, consequat vitae
+          orci. Integer a turpis ut nibh pharetra dignissim at bibendum odio. Sed gravida arcu ut nulla posuere
+          aliquam. Suspendisse vulputate cursus diam, eu rhoncus justo malesuada non. Aenean pellentesque nisl
+          elementum egestas efficitur. Maecenas et erat et risus bibendum consectetur quis a justo. Fusce fermentum
+          urna turpis, non eleifend tellus faucibus a. Quisque eu nisl ut ligula rutrum maximus eget quis neque. Donec
+          ac posuere ipsum. Curabitur pharetra facilisis euismod. Mauris tincidunt pulvinar dapibus. Mauris vel ligula
+          nec metus dapibus interdum.
+        </p> -->
+      </section>
+
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

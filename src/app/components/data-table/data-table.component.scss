@@ -1,0 +1,55 @@
+@import '../../../variables.scss';
+
+table.mat-table{
+  width: 100%;
+  box-shadow: none;
+  border: 1px solid #CCCCCC;
+}
+
+th.mat-header-cell{
+  color: #333333;
+  // font-size: 8px;
+  border-bottom-color: #777777;
+  background: map-get($cini-colors, color-gray);
+}
+
+td.mat-cell{
+  border-bottom-color: #777777;
+  // font-size: 8px;
+  
+
+  .check-icon{
+    color: map-get($cini-colors, color-green);
+  }
+
+  .media-wrapper{
+    display: flex;
+    span{
+      margin-right: 7px;
+    }
+  }
+
+  .media-icon{
+    width: 17px;
+    height: 13px;
+    border-radius: 4px;
+    background: var(--green, #06a570);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    mat-icon{
+      font-size: 15px;
+      color: white;
+      width: unset;
+      height: unset;
+    }
+  }
+}
+
+// td:nth-child(2){
+//     &.mat-cell{
+//       color: #909090;
+//     }
+// }

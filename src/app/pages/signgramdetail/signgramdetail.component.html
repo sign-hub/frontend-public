@@ -1,0 +1,171 @@
+<mat-sidenav-container class="sidenav-container" [class.is-mobile]="customMobileQuery.mobileQuery.matches">
+  <mat-sidenav [mode]="customMobileQuery.mobileQuery.matches ? 'over' : 'side'" [(opened)]="opened" role="navigation"
+    [disableClose]="false">
+
+    <mat-nav-list class="mat-no-padding">
+
+      <h3 class="header-content">
+        <span class="empty-filler">
+          {{grammarTitle}}
+        </span>
+        <a *ngIf="grammar && grammar.pdfAvailable" mat-icon-button matTooltip="Download this grammar"
+          matTooltipPosition="before" aria-label="click to download this grammar"
+          (click)="downloadFile(grammarUuid, grammarTitle)">
+
+          <mat-icon>cloud_download</mat-icon>
+        </a>
+      </h3>
+      <div class="body-content">
+        <div class="content custom-scrollbar mat-padding">
+          <div class="form-search-term ">
+            <input matInput placeholder="Type at least 3 characters" (input)="filterChanged($event.target.value, null)"
+              class="input-rounded mat-margin-bottom" #filter />
+            <button *ngIf="filter.value" mat-mini-fab mat-icon-button color="accent" matSuffix aria-label="Clear filter"
+              (click)="resetFilter(); filter.value=''" class="mat-elevation-z2">
+              <mat-icon>refresh</mat-icon>
+            </button>
+          </div>
+          <div *ngIf="grammar.frontMatter" class='mat-tree-node'><button mat-button (click)="goToFront()"
+              [ngClass]="{ 'selected' : !grammarPart }" class="mat-tree-item">
+              FRONT</button></div>
+          <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+
+            <!-- This is the tree node template for leaf nodes -->
+            <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding [matTreeNodePaddingIndent]="20">
+              <!-- use a disabled button to provide padding for tree leaf -->
+              <button mat-icon-button disabled></button>
+              <button mat-button (click)="getGrammarPartByUuid(node.uuid)"
+                [ngClass]="{ 'selected' : !!grammarPart && grammarPart.uuid == node.uuid,  'mat-accent mat-raised-button': node.isSearched ==true , 'mat-no-padding': node.isSearched == false }"
+                class="mat-tree-item">
+                {{node.item}}</button>
+            </mat-tree-node>
+            <!-- This is the tree node template for expandable nodes -->
+            <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding [matTreeNodePaddingIndent]="20">
+              <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.item">
+                <mat-icon class="mat-icon-rtl-mirror">
+                  {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                </mat-icon>
+              </button>
+              <button mat-button (click)="getGrammarPartByUuid(node.uuid)"
+                [ngClass]="{ 'selected' : !!grammarPart && grammarPart.uuid == node.uuid, 'mat-accent mat-raised-button': node.isSearched == true, 'mat-no-padding': node.isSearched == false}"
+                class="mat-tree-item">
+                {{node.item}}</button>
+            </mat-tree-node>
+          </mat-tree>
+        </div>
+      </div>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav #drawer [mode]="keepOpen ? 'side' : 'over'" position="end" [(opened)]="hasTopic">
+
+    <div class="body-content">
+      <div class="content custom-scrollbar mat-padding">
+
+        <div class="form-search-term mat-elevation-z2">
+          <input id="searchTermsInput" (keyup)="onEnter(search.value, $event)" matInput placeholder="Search terms"
+            class="input-rounded mat-margin-bottom" #search />
+          <button mat-fab-button mat-icon-button color="action" matSuffix class="submit-btn"
+            (click)="searchTerms(search.value)" aria-label="search terms in grammar"
+            [class.mat-elevation-z2]="search.value!=''">
+            <mat-icon>search</mat-icon>
+          </button>
+
+          <button mat-mini-fab mat-icon-button matSuffix color="accent" *ngIf="search.value" aria-label="Clear"
+            (click)="resetAllFilters(); search.value=''" class="mat-elevation-z2">
+            <mat-icon>refresh</mat-icon>
+          </button>
+        </div>
+
+        <mat-list *ngIf="grammarByTerms">
+          <h4 class="header-section-sidebar" mat-subheader>Found {{grammarByTerms.parts.length}} result<span
+              *ngIf="grammarByTerms.parts.length > 0 ">s</span></h4>
+          <mat-list-item *ngFor="let g of grammarByTerms.parts">
+            <mat-icon mat-list-icon>remove_red_eye</mat-icon>
+            <button mat-button (click)="getGrammarPartByUuid(g.uuid, true)"
+              aria-label="view grammar part containing terms">
+              {{g.name}}</button>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+        </mat-list>
+
+        <div *ngIf="author" class="author-info">
+          <mat-list>
+            <mat-list-item *ngIf="grammarPart.author">
+              <strong>Author</strong> {{grammarPart.author}}
+            </mat-list-item>
+            <mat-list-item *ngIf="grammarPart.author">
+              <strong>Editor</strong> {{grammarPart.editor}}
+            </mat-list-item>
+            <mat-list-item *ngIf="grammarPart.author">
+              <strong>Sign Language</strong> {{grammarPart.signLanguage}}
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item *ngIf="grammarPart.pdfAvailable">
+
+
+              <a mat-icon-button matTooltip="Download this grammar" matTooltipPosition="before"
+                aria-label="click to download this grammar" (click)="downloadFile(grammarUuid, grammarTitle)">
+                <mat-icon>cloud_download</mat-icon>
+              </a>
+
+
+
+
+
+
+            </mat-list-item>
+          </mat-list>
+
+          <h4>{{topic.word}}</h4>
+          <div>{{topic.definition}}</div>
+
+        </div>
+
+        <div *ngIf="topic" class="topic">
+          <div class="header-section-sidebar row mat-padding mat-margin-bottom mat-elevation-z2">
+            <h5 class="mat-no-margin">Gloassary</h5>
+            <mat-slide-toggle color="warn" [(ngModel)]="keepOpen"><small>Keep open</small></mat-slide-toggle>
+          </div>
+
+          <h4>{{topic.word}}</h4>
+          <div>{{topic.definition}}</div>
+        </div>
+      </div>
+    </div>
+
+  </mat-sidenav>
+
+  <mat-sidenav-content class="container-content">
+    <mat-toolbar>
+      <button mat-icon-button (click)="toggleSidenav()" aria-label="open toc tree">
+        <mat-icon matListIcon *ngIf="opened">menu_open</mat-icon>
+        <mat-icon matListIcon *ngIf="!opened">list</mat-icon>
+      </button>
+      <span class="empty-filler"></span>
+      <div class="actions-group">
+        <button *ngIf="!keepOpen" mat-mini-fab color="action" (click)="drawer.toggle()"
+          aria-label="open contextual search tool" class="mat-elevation-z2">
+          <mat-icon>search</mat-icon>
+        </button>
+
+        <a *ngIf="grammarPart && grammarPart.pdfAvailable" mat-mini-fab color="action" class="mat-elevation-z2"
+          [class.mat-margin-left]="!!grammarPart" matTooltip="Download this grammar"
+          aria-label="click to download this grammar" (click)="downloadFile(grammarPart.uuid, grammarPart.name)">
+          <mat-icon>cloud_download</mat-icon>
+        </a>
+      </div>
+
+    </mat-toolbar>
+
+    <div *ngIf="grammarPart" class="s-content" id="s-content">
+      <div #centerContainer tabindex="1" placeholder="Text" name="text" [innerHTML]="grammarPart.html | keepHtml" id="text" (click)="getTid($event)">
+      </div>
+    </div>
+    <div *ngIf="!grammarPart && grammar.frontMatter" class="s-content" id="s-content">
+      <div placeholder="Text" name="text" [innerHTML]="grammar.frontMatter | keepHtml" id="text">
+      </div>
+    </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

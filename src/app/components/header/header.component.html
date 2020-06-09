@@ -1,0 +1,58 @@
+<mat-toolbar>
+  <mat-toolbar-row class="mat-no-padding">
+    <div class="navigation">
+      <div class="main-list-wrapper">
+        <span><img src="../../../assets/image/SH_logo.png" alt="logo sing-hub" /></span>
+        <a class="link-item toggle-item" *ngIf="!showMenu" mat-button (click)="toggleMobileMenu()">
+          <mat-icon>menu</mat-icon>
+        </a>
+        <a [hidden]="hideMobileMenu" class="link-item mobileBtn" mat-button routerLink='/'
+          routerLinkActive="active-link active-home" [routerLinkActiveOptions]="{exact: true}"
+          [class.active-link]="pageTitle == 'homepage'" (click)=" closeSubMenu(true)">Home</a>
+        <a [hidden]="hideMobileMenu" class="link-item mobileBtn" mat-button routerLink='/grammar'
+          routerLinkActive="active-link active-grammars" (click)="closeSubMenu(true)">Grammars</a>
+        <a [hidden]="hideMobileMenu" class="link-item mobileBtn" mat-button routerLinkActive="active-link"
+          [class.active-atlas]="pageTitle == 'atlas' || pageTitle == 'grammar-feature' || pageTitle == 'sign-language'"
+          [class.active-link]="pageTitle == 'atlas' || pageTitle == 'grammar-feature' || pageTitle == 'sign-language'"
+          (click)="isShown = !isShown">Atlas
+          <div class="home-atlas active-sublink" *ngIf="pageTitle == 'atlas'"
+            [class.active-atlas]="pageTitle == 'atlas'">Home
+          </div>
+          <div class="grammar-feature active-sublink" *ngIf="pageTitle == 'grammar-feature'">By Grammar Features</div>
+          <div class="sign-language active-sublink" *ngIf="pageTitle == 'sign-language'">By Sign Languages</div>
+          <div *ngIf="isShown" class="dropdown-menu">
+            <a [hidden]="hideMobileMenu" class="mobileBtn secondLvl" routerLink='/atlas'
+              [class.active-link]="pageTitle == 'atlas'">Home</a>
+            <a [hidden]="hideMobileMenu" class="mobileBtn secondLvl" routerLink='/grammar-features'
+              [class.active-link]="pageTitle == 'grammar-feature'">By Grammar
+              Features </a>
+            <a [hidden]="hideMobileMenu" class="mobileBtn secondLvl" routerLink='/sign-language'
+              [class.active-link]="pageTitle == 'sign-language'">By
+              Sign Languages</a>
+          </div>
+        </a>
+
+        <!-- <a class="link-item" mat-button  routerLink='/atlas' routerLinkActive="active-link" [class.atlas]="pageTitle == 'atlas'">Atlas</a> -->
+        <a [hidden]="hideMobileMenu" class="link-item  mobileBtn" mat-button routerLink='assessment'
+          routerLinkActive="active-link active-assessment" [class.active-link]="pageTitle == 'assessment'"
+          (click)="closeSubMenu(true)">Assessment</a>
+        <!--         <a [hidden]="hideMobileMenu" class="link-item  mobileBtn" mat-button routerLink='/digital-archive'
+          routerLinkActive="active-link" [class.digital-archive]="pageTitle == 'digital-archive'"
+          (click)="closeSubMenu(true)">Life stories</a> -->
+        <a [hidden]="hideMobileMenu" class="link-item  mobileBtn" mat-button routerLink='streaming'
+          routerLinkActive="active-link active-lifeStories" [class.active-link]="pageTitle == 'life-stories-intro'"
+          (click)="closeSubMenu(true)">Life stories</a>
+        <a [hidden]="hideMobileMenu" class="link-item mobileBtn" mat-button routerLink='supportingMaterials'
+          routerLinkActive="active-link active-supporting-materials"
+          [class.active-link]="pageTitle == 'supportingMaterials'" (click)="closeSubMenu(true)">Supporting Materials</a>
+        <a [hidden]="hideMobileMenu" class="link-item mobileBtn" mat-button routerLink='project'
+          routerLinkActive="active-link active-project" [class.active-link]="pageTitle == 'project'"
+          (click)="closeSubMenu(true)">The SIGN-HUB Project</a>
+      </div>
+      <div class="login-link">
+        <a class="link-item loginBtn" mat-button (click)="closeSubMenu(true); redirect()">Login</a>
+      </div>
+    </div>
+  </mat-toolbar-row>
+
+</mat-toolbar>

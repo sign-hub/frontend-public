@@ -1,0 +1,446 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: "Open Sans";
+  src: url("assets/fonts/opensans/OpenSans-Regular.ttf") format("ttf");
+}
+
+@font-face {
+  font-family: "Open Sans Bold";
+  src: url("assets/fonts/opensans/OpenSans-Bold.ttf") format("ttf");
+}
+
+@font-face {
+  font-family: "Open Sans SemiBold";
+  src: url("assets/fonts/opensans/OpenSans-SemiBold.ttf") format("ttf");
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("assets/fonts/roboto/Roboto-Regular.ttf") format("ttf");
+}
+
+@font-face {
+  font-family: "RobotoBold";
+  src: url("assets/fonts/roboto/Roboto-Bold.ttf") format("ttf");
+}
+
+@font-face {
+  font-family: "Roboto Medium";
+  src: url("assets/fonts/roboto/Roboto-Medium.ttf") format("ttf");
+}
+
+@font-face {
+  font-family: "HelveticaNeue-Regular";
+  src: url("assets/fonts/HelveticaNeue-Regular.ttf") format("ttf");
+}
+
+@import "~@angular/material/theming";
+// Define a custom typography config that overrides the font-family as well as the
+// `headlines` and `body-1` levels.
+$custom-typography: mat-typography-config(
+  $font-family: "Roboto, monospace",
+  $headline: mat-typography-level(32px, 48px, 700),
+  $body-1: mat-typography-level(16px, 24px, 500)
+);
+
+$mat-cini-primary: (
+  50: #e8eaf6,
+  100: #c5cae9,
+  200: #9fa8da,
+  300: #7986cb,
+  400: #5c6bc0,
+  500: #3f51b5,
+  600: #3949ab,
+  700: #303f9f,
+  800: #283593,
+  900: #1a237e,
+  A100: #8c9eff,
+  A200: #536dfe,
+  A400: #3d5afe,
+  A700: #304ffe,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #ffffff
+  )
+);
+
+$mat-cini-accent: (
+  50: #fffde7,
+  100: #fff9c4,
+  200: #fff59d,
+  300: #fff176,
+  400: #ffee58,
+  500: #ffeb3b,
+  600: #ffe935,
+  700: #ffe52d,
+  800: #ffe226,
+  900: #ffdd19,
+  A100: #ffffff,
+  A200: #fffffd,
+  A400: #fff7ca,
+  A700: #fff2b1,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000
+  )
+);
+$primary: mat-palette($mat-cini-primary);
+$accent: mat-palette($mat-cini-accent);
+
+$theme: mat-light-theme($primary, $accent);
+
+@include angular-material-theme($theme);
+
+@include mat-core();
+
+@include angular-material-typography($custom-typography);
+
+@import "variables";
+@import "cinicons";
+@import "typo";
+@import "colors";
+@import "common";
+@import "responsive";
+@import "mixins";
+
+html,
+body {
+  height: 100%;
+  font-size: mat-font-size($custom-typography, body-1);
+  font-family: mat-font-family($custom-typography);
+}
+body {
+  margin: 0;
+  // font-family: "Open Sans", sans-serif !important;
+}
+
+.mat-expansion-panel-content > .mat-expansion-panel-body {
+  padding: 0 !important;
+  .mat-checkbox-layout {
+    font-family: "Roboto";
+  }
+
+  .mat-checkbox-layout .mat-checkbox-label {
+    font-weight: bold;
+  }
+}
+.mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: #56b4e9;
+}
+
+.mat-expansion-panel-content {
+  box-shadow: inset 0px -3px 5px -1px rgba(0, 0, 0, 0.2) !important;
+}
+
+.info-btn {
+  height: 24px;
+  overflow: hidden;
+  cursor: pointer;
+
+  .info-active {
+    display: none;
+  }
+
+  &:hover {
+    .info-not-active {
+      display: none;
+    }
+    .info-active {
+      display: block;
+    }
+  }
+}
+
+fra,
+mark {
+  border-bottom: 2px dotted var(--primary);
+  cursor: pointer;
+}
+
+.map,
+#map {
+  canvas {
+    object-fit: cover;
+  }
+}
+
+.mat-icon {
+  text-align: center;
+  &.mat-tertiary {
+    color: var(--tertiary);
+  }
+  &.mat-secondary {
+    color: var(--secondary);
+  }
+  &.mat-violet {
+    color: var(--violet);
+  }
+  &.mat-yellow {
+    color: var(--yellow);
+  }
+  &.mat-green {
+    color: var(--green);
+  }
+  &.mat-action {
+    color: #fff !important;
+    background-color: var(--green) !important;
+  }
+  &.mat-round {
+    border-radius: 100%;
+  }
+
+  &[color="action"] {
+    color: #fff !important;
+    background-color: var(--green) !important;
+    @include icon-round;
+  }
+}
+
+@mixin background-modifiers {
+  @each $name, $hex in $cini-colors {
+    &[color="#{$name}"] {
+      @if (#{$name} == "color-yellow") {
+        color: map-get($cini-colors, color-dark);
+        background: $hex;
+        background: linear-gradient(to right, $hex 0%, rgba($hex, 0.53) 100%);
+      } @else {
+        background: $hex;
+        color: white;
+        background: linear-gradient(to right, $hex 0%, rgba($hex, 0.53) 100%);
+      }
+    }
+  }
+}
+
+.header-content {
+  display: flex;
+  align-items: flex-start;
+  min-height: 52px;
+  padding: 15px;
+  /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#a50675", endColorstr="#87a50675",GradientType=1 );*/
+  font-size: 24px;
+  font-family: "Roboto";
+  font-weight: 600;
+  margin: 0;
+  @for $index from 1 through 6 {
+    h#{$index}{
+      font-size: inherit;
+    }
+  }
+  > * {
+    padding: 0;
+    margin: 0;
+  }
+  &[color="violet"] {
+    background: map-get($cini-colors, color-violet);
+    color: white;
+    background: linear-gradient(
+      to right,
+      map-get($cini-colors, color-violet) 0%,
+      rgba(map-get($cini-colors, color-violet), 0.53) 100%
+    );
+  }
+  &[color="green"] {
+    background: map-get($cini-colors, color-yellow);
+    color: white;
+    background: linear-gradient(
+      to right,
+      map-get($cini-colors, color-green) 0%,
+      rgba(map-get($cini-colors, color-green), 0.53) 100%
+    );
+  }
+  &[color="yellow"] {
+    background: map-get($cini-colors, color-yellow);
+    color: map-get($cini-colors, color-dark);
+    background: linear-gradient(
+      to right,
+      map-get($cini-colors, color-yellow) 0%,
+      rgba(map-get($cini-colors, color-yellow), 0.53) 100%
+    );
+  }
+  &[color="blue"] {
+    background: map-get($cini-colors, color-yellow);
+    color: map-get($cini-colors, color-dark);
+    background: linear-gradient(
+      to right,
+      map-get($cini-colors, color-yellow) 0%,
+      rgba(map-get($cini-colors, color-yellow), 0.53) 100%
+    );
+  }
+  @include background-modifiers;
+}
+
+mat-divider.mat-divider {
+  margin-top: var(--padding);
+  margin-bottom: var(--padding);
+}
+
+.mat-list-item {
+  height: initial !important;
+  .mat-line {
+    word-wrap: break-word;
+    white-space: normal !important;
+  }
+}
+.sign-language {
+  .mat-drawer-inner-container {
+    overflow: hidden;
+  }
+
+  .mat-list-item-content {
+    display: flex;
+    justify-content: space-between;
+
+    img {
+      width: 9px;
+    }
+  }
+}
+
+.mat-no- {
+  &padding {
+    padding: 0 !important;
+  }
+  &padding-top {
+    padding-top: 0 !important;
+  }
+  &padding-bottom {
+    padding-bottom: 0 !important;
+  }
+  &padding-right {
+    padding-right: 0 !important;
+  }
+  &padding-left {
+    padding-left: 0 !important;
+  }
+  &margin {
+    margin: 0 !important;
+  }
+  &margin-top {
+    margin-top: 0 !important;
+  }
+  &margin-bottom {
+    margin-bottom: 0 !important;
+  }
+  &margin-right {
+    margin-right: 0 !important;
+  }
+  &margin-left {
+    margin-left: 0 !important;
+  }
+}
+
+.mat- {
+  &padding {
+    padding: var(--padding) !important;
+  }
+  &padding-top {
+    padding-top: var(--padding) !important;
+  }
+  &padding-bottom {
+    padding-bottom: var(--padding) !important;
+  }
+  &padding-right {
+    padding-right: var(--padding) !important;
+  }
+  &padding-left {
+    padding-left: var(--padding) !important;
+  }
+  &margin {
+    margin: var(--margin) !important;
+  }
+  &margin-top {
+    margin-top: var(--margin) !important;
+  }
+  &margin-bottom {
+    margin-bottom: var(--margin) !important;
+  }
+  &margin-right {
+    margin-right: var(--margin) !important;
+  }
+  &margin-left {
+    margin-left: var(--margin) !important;
+  }
+}
+
+.sidenav-container {
+  .mat-drawer-inner-container {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: var(--color-light);
+  }
+}
+
+.feature-details-main {
+  .mat-grid-tile {
+    height: 100%;
+    max-width: 45%;
+    .mat-figure {
+      justify-content: flex-start !important;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+.mat-standard-chip {
+  transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  padding: 7px 12px;
+  border-radius: 16px;
+  align-items: center;
+  cursor: default;
+  min-height: 32px;
+  height: 1px;
+}
+
+.custom-scrollbar,
+.mat-drawer-inner-container {
+  /* width */
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: #acacac;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #acacac;
+  }
+}
+.cdk-overlay-pane {
+  min-width: 707px;
+}
