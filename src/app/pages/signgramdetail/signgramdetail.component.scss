@@ -1,11 +1,11 @@
 @import "../../../mixins.scss";
 @import "../../../variables.scss";
 
-app-signgramdetail{
+app-signgramdetail {
   .mat-tree,
-  mat-tree{
+  mat-tree {
     background: transparent;
-    button.mat-tree-item{
+    button.mat-tree-item {
       white-space: normal;
       white-space: normal;
       line-height: 2.2;
@@ -14,45 +14,45 @@ app-signgramdetail{
     }
   }
 
-  .form-search-term{
+  .form-search-term {
     display: flex;
-    input{
+    input {
       flex: 1 1 auto;
     }
   }
-.header-section-sidebar{
-  background:map-get($cini-colors, color-gray);
-  justify-content: space-between;
-  align-items: center;
-}
+  .header-section-sidebar {
+    background: map-get($cini-colors, color-gray);
+    justify-content: space-between;
+    align-items: center;
+  }
 
-.header-content{
-    margin-bottom:var(--margin);
+  .header-content {
+    margin-bottom: var(--margin);
     display: flex;
     align-items: center;
     max-height: 100%;
     min-height: 52px;
     padding: 15px;
-   @include gradient(map-get($cini-colors, color-red));
+    @include gradient(map-get($cini-colors, color-red));
     font-size: 24px;
     font-family: "Roboto";
     font-weight: 600;
   }
-  
+
   .s-name {
     font-size: 10pt;
     margin-top: 10px;
     margin-left: 10px;
     position: absolute;
   }
-  
+
   .toc-container {
     overflow: auto;
     padding: 2px 5px 2px 5px;
     // font-weight: bold;
     margin-top: 10%;
     font-size: 18px;
-    .row{
+    .row {
       flex-direction: column;
       margin: 0;
       height: auto;
@@ -66,19 +66,19 @@ app-signgramdetail{
     }
     .level-3 {
       font-size: inherit;
-  
+
       a:before {
-          content: '-';
-          color: inherit;
-          border: none;
-          margin-left: -6px;
-          padding-left: 9px;
-          position: relative;
-          display: inline-block;
-          left: -3px;
-        }
+        content: "-";
+        color: inherit;
+        border: none;
+        margin-left: -6px;
+        padding-left: 9px;
+        position: relative;
+        display: inline-block;
+        left: -3px;
+      }
     }
-    
+
     .level-4 {
       font-size: inherit;
     }
@@ -102,19 +102,18 @@ app-signgramdetail{
       font-weight: bold;
     }
     .firstlevel.row {
-      background: rgba(255,255,255,0.4);
+      background: rgba(255, 255, 255, 0.4);
       margin-bottom: 0.5em;
       padding-bottom: 0.7em;
       &.active {
-        background: rgba(255,255,255,0.8);
+        background: rgba(255, 255, 255, 0.8);
       }
       div {
         margin-bottom: 0.3em;
       }
     }
   }
-  
-  
+
   .s-left {
     width: 270px;
     float: left;
@@ -136,7 +135,7 @@ app-signgramdetail{
       }
     }
   }
-  
+
   .s-center {
     float: left;
     position: relative;
@@ -152,72 +151,72 @@ app-signgramdetail{
       /*background-color: $bg-card-title;*/
       font-weight: bold;
       /*color: $color-card-title;*/
-      font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+      font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial,
+        sans-serif;
       font-size: 14pt;
     }
     .s-content {
       max-height: 800px;
-      overflow-y : auto;
-      overflow-x : auto;
+      overflow-y: auto;
+      overflow-x: auto;
       padding: 20px;
-     .c-item {
-      i {
-        font-size: 14px;
+      .c-item {
+        i {
+          font-size: 14px;
+        }
       }
-  
-     }
     }
   }
   .selected {
-    color: #FC173D;
+    color: #fc173d;
   }
   .s-right {
     float: left;
     width: 250px;
     /*background-color: #ffffff;*/
     box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2);
-    
-    &.s-relative{
-      position:relative;
+
+    &.s-relative {
+      position: relative;
     }
-  
-    .progress-wrapper{
-      position:absolute;
-      display:block;
-      width:100%;
-      bottom:0;
+
+    .progress-wrapper {
+      position: absolute;
+      display: block;
+      width: 100%;
+      bottom: 0;
       padding: 0 5px 15px;
-      .title-progress{
-        font-weight:bold;
+      .title-progress {
+        font-weight: bold;
       }
     }
   }
-  
+
   .image-body {
     float: left;
     width: 70px;
     height: 70px;
     margin: 2px;
   }
-  
+
   .m-body {
     overflow-y: auto;
     text-align: center;
   }
-  
+
   .m-body::-webkit-scrollbar-track {
     background-color: #f2f2f2;
   }
-  
+
   .m-body::-webkit-scrollbar {
     width: 4px;
     background-color: #f2f2f2;
   }
-  
+
   .m-body::-webkit-scrollbar-thumb {
     background-color: #9d9d9d;
   }
-  
+
   .slide-foo {
     margin-top: 15px;
     box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2);
@@ -226,7 +225,7 @@ app-signgramdetail{
     padding-top: 5px;
     width: 100%;
   }
-  
+
   .f-left {
     float: left;
     width: 90px;
@@ -245,7 +244,7 @@ app-signgramdetail{
       }
     }
   }
-  
+
   .f-center {
     float: left;
     width: calc(100% - 180px);
@@ -267,22 +266,22 @@ app-signgramdetail{
       color: #f5f5f0;
       font-size: 12px;
       cursor: pointer;
-      .material-icons{
+      .material-icons {
         font-size: 20px;
         margin-top: 5px;
         color: #8a8a5c;
       }
-      .question-icon  {
+      .question-icon {
         font-size: 14px;
         margin-top: 5px;
         color: #8a8a5c;
       }
       &.selected {
-        background-color: #FC173D;
+        background-color: #fc173d;
       }
     }
   }
-  
+
   .f-right {
     width: 90px;
     float: left;
@@ -300,9 +299,8 @@ app-signgramdetail{
         margin-top: 5px;
       }
     }
-  
   }
-  
+
   md-tab-group {
     /*/deep/ .mat-tab-label {
       line-height: 40px;
@@ -324,24 +322,22 @@ app-signgramdetail{
       padding: 0 15px 15px 15px;
     }*/
   }
-  
+
   mwlResizable {
     box-sizing: border-box; // required for the enableGhostResize option to work
-  
   }
-  
+
   .e-clickarea {
     border: 1px solid black;
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(0, 0, 0, 0.1);
   }
-  
+
   textarea {
     resize: none;
   }
-  
-  
+
   .e-image.selected:before {
-    content:'';
+    content: "";
     position: absolute;
     width: 100%;
     height: 100%;
@@ -350,29 +346,29 @@ app-signgramdetail{
     left: 0;
     right: 0;
     margin: auto;
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgba(0, 0, 0, 0.2);
     z-index: 999;
   }
-  
+
   .voc-container {
     margin: 10px;
     position: absolute;
     top: 0;
     height: 100%;
-    
+
     .voc-subcontainer {
-      height: calc( 100% - 180px);
+      height: calc(100% - 180px);
       overflow-y: auto;
-      box-shadow: inset 0px -7px 26px -12px rgba(0,0,0,0.3);
-  
+      box-shadow: inset 0px -7px 26px -12px rgba(0, 0, 0, 0.3);
     }
-  
+
     .voc-title {
       padding: 2px 5px 7px 5px;
       background-color: #e4e4e4;
       font-weight: bold;
       color: #bfbfbf;
-      font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+      font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial,
+        sans-serif;
       font-size: 14pt;
       display: flex;
       align-items: center;
@@ -384,15 +380,84 @@ app-signgramdetail{
       background-color: #e4e4e4;
       font-weight: bold;
       color: #bfbfbf;
-      font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+      font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial,
+        sans-serif;
       font-size: 12pt;
       margin-bottom: 10px;
     }
     .voc-definition {
-      padding-bottom:15px;
-      font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+      padding-bottom: 15px;
+      font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial,
+        sans-serif;
     }
-  
-  } 
-  
+  }
+
+  .text-eu {
+    display: inline-block;
+    font-size: 10px;
+    vertical-align: middle;
+  }
+
+  .edited-by {
+    display: block;
+    position: relative;
+    margin-top: 36px;
+  }
+
+  .logos {
+    display: block;
+    position: relative;
+    margin-top: 192px;
+  }
+
+  .isbn-info {
+    display: block;
+    position: relative;
+    margin-top: 144px;
+  }
+
+  .creative-commons {
+    display: block;
+    position: relative;
+    margin-top: 12px;
+  }
+
+  .margin-12 {
+    display: block;
+    position: relative;
+    margin-top: 12px;
+  }
+
+  .margin-14 {
+    display: block;
+    position: relative;
+    margin-top: 14px;
+  }
+
+  .biblio-reference {
+    display: block;
+    position: relative;
+    margin-top: 12px;
+  }
+
+  .published-list {
+    display: block;
+    position: relative;
+    margin-top: 190px;
+    text-align: center;
+  }
+
+  ul.li {
+    list-style-type: none;
+  }
+
+  .pre {
+    white-space: pre-wrap; /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+    white-space: -pre-wrap; /* Opera 4-6 */
+    white-space: -o-pre-wrap; /* Opera 7 */
+    word-wrap: break-word; /* Internet Explorer 5.5+ */
+    font-family: sans-serif;
+    font-size: 11pt;
+  }
 }

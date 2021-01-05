@@ -17,6 +17,15 @@
     "changeOrigin": true,
     "logLevel": "debug"
   },
+  "/ortolang": {
+    "target": "https://www.sign-hub.eu",
+    "pathRewrite": {
+      "^/signhub": "/signhub"
+    },
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  },
   "/api": {
     "target": "http://localhost:4200",
     "secure": false

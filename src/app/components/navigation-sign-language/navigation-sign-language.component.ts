@@ -18,7 +18,7 @@ export class NavigationSignLanguageComponent implements OnInit {
   urlName;
   public sort = false;
   public errorMsg;
-  private error = false;
+  error = false;
   toggleDropdown = false;
   toggleSearchDropdown = false;
   orderCode = false;
@@ -34,6 +34,7 @@ export class NavigationSignLanguageComponent implements OnInit {
   macroAreaList: any;
   macroAreas: any;
   sortedValueCode = true;
+  controllerFeatureDetails: any;
   constructor(
     // tslint:disable-next-line:variable-name
     private languages_service: SignLanguagesService,
@@ -43,17 +44,6 @@ export class NavigationSignLanguageComponent implements OnInit {
     private renderer: Renderer2,
   ) {
 
-
-    // This events get called by all clicks on the page
-
-    // this.renderer.listen("window", "click", (e: Event) => {
-    //   if (
-    //     e.target !== this.toggleButton.nativeElement &&
-    //     e.target !== this.menu.nativeElement
-    //   ) {
-    //     this.toggleDropdown = false;
-    //   }
-    // });
     this.macroAreas = new FormControl();
     // TODO DINAMIC
     this.macroAreaList = ['Africa', 'Australia', 'Europe', 'North America', 'Papunesia', 'South America'];
@@ -182,18 +172,6 @@ export class NavigationSignLanguageComponent implements OnInit {
   }
 
   openCountry(index, uuid) {
-    /*
-    this.filteredData.map( value => {
-      // console.log(value)
-      if(value.name == name ){
-        value.isActive = true;
-      }else{
-        value.isActive = false;
-      }
-
-    })*/
-    // console.log("after", this.filteredData)
-    // this.router.navigate(['feature-details/'+ name]);
     this.router.navigate(['/sign-language/feature-details/', uuid]);
     this.navService.triggerSignLanguageContent();
   }
@@ -226,11 +204,15 @@ export class NavigationSignLanguageComponent implements OnInit {
     }
    */
   sortByCodeAsc() {
-    this.filteredData.sort((a, b) => (a.code > b.code ? -1 : 1));
+    if (this.filteredData !== undefined) {
+      this.filteredData.sort((a, b) => (a.code > b.code ? -1 : 1));
+    }
   }
 
   sortByCodeDesc() {
-    this.filteredData.sort((a, b) => (a.code < b.code ? -1 : 1));
+    if (this.filteredData !== undefined) {
+      this.filteredData.sort((a, b) => (a.code < b.code ? -1 : 1));
+    }
   }
 
   toggleCodeAscDesc() {

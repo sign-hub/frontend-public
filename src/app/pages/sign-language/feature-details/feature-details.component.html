@@ -140,6 +140,27 @@
             </div>
             <div #overlayElement id="popup" title="Popup OpenLayers">
             </div>
+            <h4 class="content-providers">Content-Providers:</h4>
+            <p
+              *ngIf="LanguageDetail['response']!= null && (LanguageDetail['response'].cpPHON || LanguageDetail['response'].cpLEX || LanguageDetail['response'].cpMORPH || LanguageDetail['response'].cpSYN || LanguageDetail['response'].cpPRAG); else elseBlock">
+              <span *ngIf="LanguageDetail['response'].cpPHON"> {{ LanguageDetail['response'].cpPHON }}</span>
+              <span *ngIf="LanguageDetail['response'].cpLEX"
+                class="new-line">{{ LanguageDetail['response'].cpLEX }}</span>
+              <span *ngIf="LanguageDetail['response'].cpMORPH"
+                class="new-line">{{ LanguageDetail['response'].cpMORPH }}</span>
+              <span *ngIf="LanguageDetail['response'].cpSYN"
+                class="new-line">{{ LanguageDetail['response'].cpSYN }}</span>
+              <span *ngIf="LanguageDetail['response'].cpPRAG"
+                class="new-line">{{ LanguageDetail['response'].cpPRAG }}</span>
+            </p>
+            <h4>Acknowledgements</h4>
+            <p *ngIf="LanguageDetail['response']!= null && LanguageDetail['response'].ack; else elseBlock">
+              {{ LanguageDetail['response'].ack }}
+            </p>
+            <br>
+            <ng-template #elseBlock>
+              <p>n/a</p>
+            </ng-template>
           </div>
 
           <ng-template #elseBlockMap>

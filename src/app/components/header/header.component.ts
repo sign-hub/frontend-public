@@ -1,5 +1,4 @@
 import { Component, OnInit, ChangeDetectorRef, NgZone, Inject } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
 import { HeaderService } from 'src/app/services/header/header.service';
 
 @Component({
@@ -10,6 +9,7 @@ import { HeaderService } from 'src/app/services/header/header.service';
 export class HeaderComponent implements OnInit {
   pageTitle;
   isShown: boolean;
+  showMenu: boolean;
   isShownStreaming: boolean;
   hideMobileMenu: boolean;
   public innerWidth: any;
@@ -18,7 +18,6 @@ export class HeaderComponent implements OnInit {
     private headerService: HeaderService,
     private cdRef: ChangeDetectorRef,
     private ngZone: NgZone,
-    @Inject(DOCUMENT) private document: Document
   ) {
     this.isShown = false;
     this.isShownStreaming = false;
@@ -59,10 +58,12 @@ export class HeaderComponent implements OnInit {
 
   closeSubMenu(bool) {
     this.isShown = !bool;
+    this.isShownStreaming = !bool;
   }
 
   redirect() {
-    this.document.location.href = 'http://platform.sign-hub.eu/';
+    window.open('http://platform.sign-hub.eu/');
+
     // window.open('https://10.6.0.162', '_blank');
   }
 

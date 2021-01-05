@@ -8,13 +8,13 @@
         </a>
         <a [hidden]="hideMobileMenu" class="link-item mobileBtn" mat-button routerLink='/'
           routerLinkActive="active-link active-home" [routerLinkActiveOptions]="{exact: true}"
-          [class.active-link]="pageTitle == 'homepage'" (click)=" closeSubMenu(true)">Home</a>
+          [class.active-link]="pageTitle == 'homepage'" (click)="closeSubMenu(true)">Home</a>
         <a [hidden]="hideMobileMenu" class="link-item mobileBtn" mat-button routerLink='/grammar'
           routerLinkActive="active-link active-grammars" (click)="closeSubMenu(true)">Grammars</a>
         <a [hidden]="hideMobileMenu" class="link-item mobileBtn" mat-button routerLinkActive="active-link"
           [class.active-atlas]="pageTitle == 'atlas' || pageTitle == 'grammar-feature' || pageTitle == 'sign-language'"
           [class.active-link]="pageTitle == 'atlas' || pageTitle == 'grammar-feature' || pageTitle == 'sign-language'"
-          (click)="isShown = !isShown">Atlas
+          (click)="isShown = !isShown; isShownStreaming = false">Atlas
           <div class="home-atlas active-sublink" *ngIf="pageTitle == 'atlas'"
             [class.active-atlas]="pageTitle == 'atlas'">Home
           </div>
@@ -39,15 +39,37 @@
         <!--         <a [hidden]="hideMobileMenu" class="link-item  mobileBtn" mat-button routerLink='/digital-archive'
           routerLinkActive="active-link" [class.digital-archive]="pageTitle == 'digital-archive'"
           (click)="closeSubMenu(true)">Life stories</a> -->
-        <a [hidden]="hideMobileMenu" class="link-item  mobileBtn" mat-button routerLink='streaming'
-          routerLinkActive="active-link active-lifeStories" [class.active-link]="pageTitle == 'life-stories-intro'"
-          (click)="closeSubMenu(true)">Life stories</a>
+        <a [hidden]="hideMobileMenu" class="link-item mobileBtn" mat-button routerLinkActive="active-link"
+          [class.active-atlas]="pageTitle == 'life-stories-intro' || pageTitle == 'digital-archive' || pageTitle == 'documentary' || pageTitle == 'archive-isl'"
+          [class.active-link]="pageTitle == 'life-stories-intro' || pageTitle == 'digital-archive' || pageTitle == 'documentary' || pageTitle == 'archive-isl'"
+          (click)="isShownStreaming = !isShownStreaming; isShown = false">Life stories
+          <div class="active-sublink" *ngIf="pageTitle == 'life-stories-intro'"
+            [class.active-atlas]="pageTitle == 'life-stories-intro'">
+            Home
+          </div>
+          <div class="active-sublink digital-archive" *ngIf="pageTitle == 'digital-archive'">Archive</div>
+          <div class="active-sublink documentary" *ngIf="pageTitle == 'documentary'">Documentary</div>
+          <div class="active-sublink archive-isl" *ngIf="pageTitle == 'archive-isl'">Archive ISL</div>
+          <div class="active-sublink archive-lsf" *ngIf="pageTitle == 'archive-lsf'">Archive LSF</div>
+          <div *ngIf="isShownStreaming" class="dropdown-menu-streaming">
+            <a [hidden]="hideMobileMenu" class="mobileBtn secondLvl" routerLink='/streaming'
+              [class.active-link]="pageTitle == 'life-stories-intro'">Home</a>
+            <a [hidden]="hideMobileMenu" class="mobileBtn secondLvl" routerLink='/digital-archive'
+              [class.active-link]="pageTitle == 'digital-archive'">Archive</a>
+            <a [hidden]="hideMobileMenu" class="mobileBtn secondLvl" routerLink='/documentary'
+              [class.active-link]="pageTitle == 'documentary'">Documentary</a>
+            <a [hidden]="hideMobileMenu" class="mobileBtn secondLvl" routerLink='/archive-isl'
+              [class.active-link]="pageTitle == 'archive-isl'">Archive ISL</a>
+            <a [hidden]="hideMobileMenu" class="mobileBtn secondLvl disabled-link"
+              [class.active-link]="pageTitle == 'archive-lsf'">Archive LSF</a>
+          </div>
+        </a>
         <a [hidden]="hideMobileMenu" class="link-item mobileBtn" mat-button routerLink='supportingMaterials'
           routerLinkActive="active-link active-supporting-materials"
-          [class.active-link]="pageTitle == 'supportingMaterials'" (click)="closeSubMenu(true)">Supporting Materials</a>
+          [class.active-link]="pageTitle == 'supportingMaterials'" (click)="closeSubMenu(true)">User Guidelines</a>
         <a [hidden]="hideMobileMenu" class="link-item mobileBtn" mat-button routerLink='project'
           routerLinkActive="active-link active-project" [class.active-link]="pageTitle == 'project'"
-          (click)="closeSubMenu(true)">The SIGN-HUB Project</a>
+          (click)="closeSubMenu(true)">The SIGN-HUB project</a>
       </div>
       <div class="login-link">
         <a class="link-item loginBtn" mat-button (click)="closeSubMenu(true); redirect()">Login</a>

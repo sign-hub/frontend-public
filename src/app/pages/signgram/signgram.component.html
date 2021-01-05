@@ -31,13 +31,15 @@
         <mat-card-title (click)='openGrammar(grammar)'>
           <h3 class="mat-link-item">{{grammar.grammarName}}</h3>
         </mat-card-title>
-        <mat-card-subtitle>Loren ipsum abstract</mat-card-subtitle>
+        <mat-card-subtitle></mat-card-subtitle>
       </mat-card-header>
       <mat-card-actions>
         <!-- <button mat-flat-button class="mat-round" (click)='openGrammar(grammar)'>views</button> -->
         <button mat-mini-fab color="action" matTooltip="Download this grammar" matTooltipPosition="before"
           aria-label="click to download this grammar">
-          <mat-icon aria-label="download grammar">cloud_download</mat-icon>
+          <mat-icon aria-label="download grammar" (click)="downloadFile(grammar.uuid, grammar.grammarTitle)">
+            cloud_download
+          </mat-icon>
         </button>
       </mat-card-actions>
     </mat-card>
@@ -52,8 +54,7 @@
       </a>
 
       <div class="content-header ">
-        <h1 class="title-header">Welcome to the page of SIGN-HUB Sign Language Grammars!</h1>
-        <!-- <h3 class="sub-header">Sub header tie</h3> -->
+        <h1 class="title-header">SIGN-HUB Sign Language Grammars</h1>
       </div>
 
       <section class="container-body text-justify">
@@ -67,6 +68,12 @@
         <h4>
           Title
         </h4> -->
+        <video src="https://www.sign-hub.eu/public/video_2_gramatica.mp4" width="777px" controls>
+          Your browser does not support the video tag.
+        </video>
+        <br>
+        <br>
+
         <p>
           This section of the platform currently hosts the grammars of 7 sign languages: Catalan Sign Language (LSC),
           French Sign Language (LSF), German Sign Language (DGS), Italian Sign Language (LIS), Sign Language of the
@@ -81,8 +88,9 @@
           titled as “Topics in the Grammar of …”.
         </p>
         <p>
-          These grammars were written by the researchers in the <a routerLink="project">SIGN-HUB project</a> following
-          the guidance provided in the<a routerLink="#"> SignGram Blueprint</a> and are based on both the linguistics
+          These grammars were written by the researchers in the <a routerLink="/project">SIGN-HUB project</a> following
+          the guidance provided in the<a href="https://doi.org/10.1515/9781501511806" target="_blank"> SignGram
+            Blueprint</a> and are based on both the linguistics
           literature that was available as well as original
           research done during the project.
         </p>

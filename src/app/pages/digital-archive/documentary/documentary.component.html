@@ -1,0 +1,103 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer mode="side" [(opened)]="opened" role="navigation">
+    <mat-nav-list>
+      <div class="left-side-nav">
+        <div class="top">
+          <div class="header-content" color="color-red">
+            <h1>SIGN-HUB Documentary</h1>
+          </div>
+        </div>
+        <div class="history-notes mat-padding">
+          <div class="item col-12" *ngFor="let item of videosDocumentary; let i = index" (click)="goToVideoDetails(i)">
+            <div class="img-wrapper mat-elevation-z2 mat-margin-bottom center-text">
+              <img src="../../../assets/image/thumb.png" alt="{{item.name}}" />
+            </div>
+            <div class="details">
+              <h3 class="item-name mat-h3">{{ item.name }}</h3>
+              <p class="datetime">{{ item.date }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="text-justify margin-top">
+      <p>
+        <i>‘We were there...We are here’</i> is a documentary movie based on interviews with elderly signers conducted or digitalized
+        in the framework of the SIGN-HUB project. The interviewees are signers of Catalan Sign Language (LSC), French Sign
+        Language (LSF), German Sign Language (DGS), Israeli Sign Language (ISL), Italian Sign Language (LIS), Sign Language of
+        the Netherlands (NGT), Spanish Sign Language (LSE), and Turkish Sign Language (TİD). <br>
+        The interviews, which were all conducted by Deaf interviewers and by Deaf crews, tell the life stories of signers,
+        including their involvement in major events of the history of Europe. <br>
+        Lead partner: Roland Pfau (University of Amsterdam) <br>
+        The production of the documentary has been coordinated by Meltem Kelepir, leader of the SIGN-HUB team at Bogazici
+        University: Vincenza Iadevaia Gökgöz (producer), Aslı Göksel (assistant producer), Burcu Saral (assistant producer),
+        Affan Taner (editor), and Ali Kanat (assistant editor). <br>
+      </p>
+        Currently, the following versions (with different subtitles and sign language interpretation) are available. <br>
+        <br>
+        <ul>
+          <li><i>‘We were there... We are here’</i> (<a (click)="goToVideoDetails(null ,'SignHubDocumentary_stream_nosub.mp4')" href="javascript:void(0)">with no subtitles</a>)</li>
+          <li><i>‘We were there... We are here’</i> (<a (click)="goToVideoDetails(null ,'SignHubDocumentary_stream_sub.mp4')" href="javascript:void(0)">with English subtitles</a>)</li>
+          <li><i>‘We were there... We are here’</i> (<!-- <a href=""> -->with English subtitles and IS<!-- </a> -->): not yet available</li>
+          <li><i>‘We were there... We are here’</i> (<!-- <a href=""> -->with Catalan subtitles<!-- </a> -->): not yet available</li>
+          <li><i>‘We were there... We are here’</i> (<!-- <a href=""> -->with Catalan subtitles and LSC<!-- </a> -->): not yet available</li>
+          <li><i>‘We were there... We are here’</i> (<a (click)="goToVideoDetails(null ,'SignHubDocumentary_DE_stream_sub.mp4')" href="javascript:void(0)">with German subtitles</a>)</li>
+          <li><i>‘We were there... We are here’</i> (<!-- <a href=""> -->with Spanish subtitles<!-- </a> -->): not yet available</li>
+          <li><i>‘We were there... We are here’</i> (<!-- <a href=""> -->with Spanish subtitles and LSC<!-- </a> -->): not yet available</li>
+          <li><i>‘We were there... We are here’</i> (<a (click)="goToVideoDetails(null,'SignHubDocumentary_TR_stream_sub.mp4')" href="javascript:void(0)">with Turkish subtitles</a>)</li>
+          <li><i>‘We were there... We are here’</i> (<!-- <a href=""> -->with Turkish subtitles and TİD<!-- </a> -->): not yet available</li>
+        </ul>
+    </div>
+    <div class="digital-archive-details" *ngIf="!isEmpty">
+      <div class="video-content">
+        <vg-player width="100%" height="300px" *ngIf="videoSrc">
+          <video id="video" controls preload="auto" #videoTest>
+            <source src="{{videoSrc}}" type="video/mp4" *ngIf="videoSrc">
+            <track *ngFor="let item of subtitles" kind="subtitles" label="{{item.label}}" [src]="item.src"
+              srclang="{{item.srclang}}">
+
+            <!-- <track kind="subtitles" label="English" src="http://static.videogular.com/assets/subs/pale-blue-dot.vtt" srclang="en" default>
+                  <track kind="subtitles" label="Español" src="http://static.videogular.com/assets/subs/pale-blue-dot-es.vtt" srclang="es"> -->
+          </video>
+        </vg-player>
+      </div>
+      <div class="video-details">
+        <div class="header-content">
+          {{videoName}}
+          <!-- <button mat-button (click)="downloadFile(videoSrc,originalName)">
+            <mat-icon>cloud_download</mat-icon>
+          </button> -->
+        </div>
+        <div class="body-content">
+          <ul>
+            <li class="sr-only">Original file name : <strong>{{ originalName }}</strong></li>
+            <li>List of keywords : <strong>{{ videoFormat }}</strong></li>
+            <li>Sign language of the actor-signer : <strong>{{ fileSize }}</strong></li>
+            <li>Date of the video : <strong>{{ pubblicationdate | date }}</strong></li>
+            <li>Location : <strong>{{ authorName }}</strong> </li>
+          </ul>
+
+          <mat-divider></mat-divider>
+          <!--  <div class="bottom latest-videos mat-padding">
+            <div class="bottom-content item item-wrapped" *ngFor="let video of latestVideos; let i = index;">
+              <div class="img-wrapper mat-no-padding mat-margin-bottom">
+                <img src="{{ video.thumb }}" alt="{{ video.name }}" (click)="playVideo(video.name)"
+                  class="mat-elevation-z2" />
+                <span class="time">{{ video.minutes }} {{ video.minutes }}</span>
+              </div>
+              <div class="video-details ">
+                <h2 class="item-name">{{ video.name }}</h2>
+                <p class="datetime">{{video.modification | date}}</p>
+              </div>
+            </div>
+          </div> -->
+
+
+        </div>
+      </div>
+    </div>
+    <div *ngIf="isEmpty">empty results</div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

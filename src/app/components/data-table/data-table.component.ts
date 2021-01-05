@@ -61,6 +61,10 @@ export class DataTableComponent implements OnInit {
       this.nodeTable = changes['filter'].currentValue;
       this.onFilter();
     }
+    if (changes['data']) {
+      this.data = changes['data'].currentValue;
+      this.initialize();
+    }
   }
 
 

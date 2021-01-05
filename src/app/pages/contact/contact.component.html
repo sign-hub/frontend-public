@@ -1,116 +1,111 @@
 <mat-sidenav-container class="sidenav-container">
-  <div class="contact-content">
-    <div class="info">
-      <h2>Lorem ipsum</h2>
-      <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book. It has survived not only five
-        centuries
-      </p>
-      <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s,
-      </p>
-    </div>
-    <div class="contact-form">
+  <div class="row justify-content-center">
+    <div class="col col-lg-10">
+      <div class="text-justify margin-from-top">
+        <div class="info">
+          <h2>Contact</h2>
+          <p>
+            If you have questions, comments or feedback about the contents displayed on the platform, or if you would
+            like to inquire about or contribute to Grammars, Atlas, Assessment tools, and Life Stories, please fill out
+            the form below and the SIGN-HUB Scientific Committee will get in touch with you with more detailed
+            information on the procedure.
+          </p>
+        </div>
 
-      <div class="alert alert-success" *ngIf="isSuccess">
-        <h3>Your request registration has been correctly sent , we will send you
-          an email as soon your details have been verified,thanks!
-        </h3>
-      </div>
-
-      <div class="alert alert-danger alert-dismissible" role="alert" *ngIf="invalidForm">
-        <h2 class="text-center"><strong>Error</strong></h2>
-        <h3 class="text-center">Invalid form request</h3>
-      </div>
-
-
-      <form [formGroup]="contactForm" (ngSubmit)="onSubmit(contactForm)">
-
-        <div class="alert alert-danger alert-dismissible" role="alert" *ngIf="error">
-          <h2 class="text-center"><strong>Error</strong></h2>
-          <h3>At the moment it is not possible to manage your registration request,<br>
-            try again later.
+        <div class="alert alert-success" *ngIf="isSuccess">
+          <h3>Your request registration has been correctly sent , we will send you
+            an email as soon your details have been verified,thanks!
           </h3>
-          <button type="button" class="close" (click)="error = false" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
         </div>
 
-        <div class="cols">
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Name" formControlName="name" />
-          </mat-form-field>
-          <mat-error *ngIf="contactForm.controls.name.touched && contactForm.controls.name.value == ''">
-            Name is required!
-          </mat-error>
-        </div>
-
-        <div class="cols">
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Surname" formControlName="lastName" />
-          </mat-form-field>
-          <mat-error *ngIf="contactForm.controls.lastName.touched && contactForm.controls.lastName.value == ''">
-            Surname is required!
-          </mat-error>
-        </div>
-
-        <div class="cols">
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Email" formControlName="email" email />
-          </mat-form-field>
-          <mat-error *ngIf="contactForm.controls.email.touched && contactForm.controls.email.value == ''">
-            Email is required!
-          </mat-error>
-          <mat-error
-            *ngIf="contactForm.controls.email.touched && contactForm.controls.email.value != '' && contactForm.controls.email.valid == false">
-            Email is not Valid
-          </mat-error>
-        </div>
-
-        <div class="cols">
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Organization" formControlName="organization" />
-          </mat-form-field>
-          <mat-error *ngIf="contactForm.controls.organization.touched && contactForm.controls.organization.value == ''">
-            Organization is required!
-          </mat-error>
-        </div>
-
-        <div class="cols">
-          <mat-form-field>
-            <mat-label>Tool</mat-label>
-            <mat-select formControlName="tool">
-              <mat-option *ngFor="let item of tools" [value]="item.value">
-                {{item.name}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-error *ngIf="contactForm.controls.tool.touched && contactForm.controls.tool.value == ''">
-            Tool is required!
-          </mat-error>
-        </div>
-        <div class="full-width-col">
-          <mat-form-field>
-            <textarea matInput placeholder="Why do you want to register?" formControlName="description"></textarea>
-          </mat-form-field>
-          <mat-error *ngIf="contactForm.controls.description.touched && contactForm.controls.description.value == ''">
-            Description is required!
-          </mat-error>
-        </div>
-
-        <div class="btn-wrapper">
-          <button mat-raised-button class="register-btn" [disabled]="checkSubmit(contactForm)"
-            [style.opacity]="checkSubmitBtn(contactForm)">Register</button>
+        <div class="alert alert-danger alert-dismissible" role="alert" *ngIf="invalidForm">
+          <h2 class="text-center"><strong>Error</strong></h2>
+          <h3 class="text-center">Invalid form request</h3>
         </div>
 
 
-        <!-- <button type="submit">Send</button> -->
-      </form>
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit(contactForm)">
+
+          <div class="alert alert-danger alert-dismissible" role="alert" *ngIf="error">
+            <h2 class="text-center"><strong>Error</strong></h2>
+            <h3>At the moment it is not possible to manage your registration request,<br>
+              try again later.
+            </h3>
+            <button type="button" class="close" (click)="error = false" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="example-container">
+            <mat-form-field class="middle-width">
+              <input matInput placeholder="Name" formControlName="name" />
+              <mat-error *ngIf="contactForm.controls.name.touched && contactForm.controls.name.value == ''">
+                Name is required!
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="middle-width">
+              <input matInput placeholder="Surname" formControlName="lastName" />
+              <mat-error *ngIf="contactForm.controls.lastName.touched && contactForm.controls.lastName.value == ''">
+                Surname is required!
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="example-container">
+            <mat-form-field class="middle-width">
+              <input matInput placeholder="Email" formControlName="email" email />
+              <mat-error *ngIf="contactForm.controls.email.touched && contactForm.controls.email.value == ''">
+                Email is required!
+              </mat-error>
+              <mat-error
+                *ngIf="contactForm.controls.email.touched && contactForm.controls.email.value != '' && contactForm.controls.email.valid == false">
+                Email is not Valid
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="middle-width">
+              <input matInput placeholder="Organization" formControlName="organization" />
+              <mat-error
+                *ngIf="contactForm.controls.organization.touched && contactForm.controls.organization.value == ''">
+                Organization is required!
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="example-container">
+            <mat-form-field class="full-width">
+              <mat-label>Category</mat-label>
+              <mat-select formControlName="tool">
+                <mat-option *ngFor="let item of tools" [value]="item.value">
+                  {{item.name}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="contactForm.controls.tool.touched && contactForm.controls.tool.value == ''">
+                Tool is required!
+              </mat-error>
+            </mat-form-field>
+          </div>
+         <!--  <div class="example-container">
+            <mat-form-field class="full-width">
+              <textarea matInput
+                placeholder="Why do you want to register?&#x0a;Please explain briefly why you are contacting the SIGN-HUB Scientific Committee (to contribute to an existing grammar, to contribute a new grammar, to contribute to ATLAS etc.)."
+                formControlName="description"></textarea>
+              <mat-error
+                *ngIf="contactForm.controls.description.touched && contactForm.controls.description.value == ''">
+                Description is required!
+              </mat-error>
+            </mat-form-field>
+          </div> -->
+
+          <div class="btn-wrapper">
+            <button mat-raised-button class="register-btn" [disabled]="checkSubmit(contactForm)"
+              [style.opacity]="checkSubmitBtn(contactForm)">Submit</button>
+          </div>
+
+
+          <!-- <button type="submit">Send</button> -->
+        </form>
+      </div>
     </div>
   </div>
+
 </mat-sidenav-container>

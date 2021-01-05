@@ -11,22 +11,28 @@
     <td mat-cell *matCellDef="let element"> {{element.position}} </td>
   </ng-container> -->
 
-  <!-- Name Column -->
+  <!-- Feature Column -->
   <ng-container matColumnDef="Feature">
     <th mat-header-cell *matHeaderCellDef>Feature</th>
-    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    <td mat-cell *matCellDef="let element">
+      {{ element.name }} <br>
+      <ul>
+        <li *ngFor="let item of element.val">{{item.val}}</li>
+      </ul>
+    </td>
   </ng-container>
 
-  <!-- Weight Column -->
-  <ng-container matColumnDef="Value">
+  <!-- Value Column -->
+  <!-- <ng-container matColumnDef="Value">
     <th mat-header-cell *matHeaderCellDef>Weight</th>
     <td mat-cell *matCellDef="let element">{{ element.val.label }} {{ element.val.val}}</td>
-  </ng-container>
+  </ng-container> -->
 
-  <!-- Symbol Column -->
+  <!-- Chapter Column -->
   <ng-container matColumnDef="Chapter">
     <th mat-header-cell *matHeaderCellDef>Chapter</th>
-    <td mat-cell *matCellDef="let element">{{element.chapterName}}
+    <td mat-cell *matCellDef="let element">
+      {{element.bluePrintSection}}
       <!-- <div class="media-wrapper">
         <span>Media</span>
         <div class="icon-wrapper media-icon">
@@ -37,7 +43,7 @@
   </ng-container>
 
   <ng-container matColumnDef="Personal">
-    <th mat-header-cell *matHeaderCellDef>Personal</th>
+    <th mat-header-cell *matHeaderCellDef>Personal estimation</th>
     <td mat-cell *matCellDef="let element">
       <mat-icon class="check-icon" *ngIf="element.personalJudgment" matSuffix>check</mat-icon>
     </td>

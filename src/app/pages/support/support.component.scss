@@ -1,8 +1,7 @@
-@import '../../../variables.scss';
-.main-container{
-  background: #E8E8E8;
+@import "../../../variables.scss";
+.main-container {
   height: 100%;
-  .support-content{
+  .support-content {
     max-width: 1040px;
     margin: auto;
     background: map-get($cini-colors, color-white);

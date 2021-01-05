@@ -1,26 +1,22 @@
-import { element } from 'protractor';
-import { Component, OnInit, ChangeDetectorRef, Inject, AfterViewInit, ElementRef, ViewChild, Injectable, Input, Output, EventEmitter } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { NavService } from "src/app/services/navigation-streaming-tool/nav.service";
+import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild, Injectable, Input, Output, EventEmitter } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { NavService } from 'src/app/services/navigation-streaming-tool/nav.service';
 
-import { NestedTreeControl, FlatTreeControl } from "@angular/cdk/tree";
-import { MatTreeNestedDataSource, MatTreeFlattener, MatTreeFlatDataSource } from "@angular/material/tree";
+import { FlatTreeControl } from '@angular/cdk/tree';
+import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material/tree';
 import { SignLanguagesService } from 'src/app/services/sign-languages-list/sign-languages.service';
 import { MapService } from 'src/app/services/map/map.service';
 
 import OlFeature from 'ol/Feature';
-import OlView from 'ol/View';
 import { Vector as VectorLayer } from 'ol/layer';
 import Point from 'ol/geom/Point';
-import { Icon, Style } from 'ol/style';
+import { Style } from 'ol/style';
 import Text from 'ol/style/Text';
 import Fill from 'ol/style/Fill';
 import VectorSource from 'ol/source/Vector';
 import { fromLonLat } from 'ol/proj';
 import { BehaviorSubject } from 'rxjs';
 import { MaxSelectionModel } from 'src/app/max-selection-model';
-import { NgIf } from '@angular/common';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 /**
@@ -108,13 +104,13 @@ export class ChecklistDatabase {
    */
 
   buildFileTree(obj: { [key: string]: any }, level: number): TocItemNode[] {
-    let ret = new Array<TocItemNode>();
+    const ret = new Array<TocItemNode>();
     console.log(obj);
     Object.keys(obj).forEach((key) => {
-      let area = obj[key];
+      const area = obj[key];
       const node = new TocItemNode();
       node.item = key;
-      if (area != undefined && area != null) {
+      if (area !== undefined && area !== null) {
         node.children = new Array<TocItemNode>();
         area.forEach((feature) => {
           const n1 = new TocItemNode();
@@ -149,10 +145,10 @@ export class ChecklistDatabase {
   public filter(filterText: string) {
     let filteredTreeData = {};
     if (filterText) {
-      for (let key in this.treeData) {
+      for (const key in this.treeData) {
         if (this.treeData.hasOwnProperty(key)) {
-          let subtree = this.treeData[key].filter(d => d.name.toLocaleLowerCase().indexOf(filterText.toLocaleLowerCase()) > -1);
-          if (subtree != undefined && subtree != null && subtree.length > 0) {
+          const subtree = this.treeData[key].filter(d => d.name.toLocaleLowerCase().indexOf(filterText.toLocaleLowerCase()) > -1);
+          if (subtree !== undefined && subtree !== null && subtree.length > 0) {
             filteredTreeData[key] = subtree;
           }
         }
@@ -168,7 +164,8 @@ export class ChecklistDatabase {
   }
 
   objectFilter(obj, predicate) {
-    var result = {}, key;
+    const result = {};
+    let key: string | number;
     for (key in obj) {
       if (obj.hasOwnProperty(key) && !predicate(obj[key])) {
         result[key] = obj[key];
@@ -216,9 +213,9 @@ export class ChecklistDatabase {
 
 
 @Component({
-  selector: "app-feature-details",
-  templateUrl: "./feature-details.component.html",
-  styleUrls: ["./feature-details.component.scss"],
+  selector: 'app-feature-details',
+  templateUrl: './feature-details.component.html',
+  styleUrls: ['./feature-details.component.scss'],
   providers: [ChecklistDatabase]
 })
 export class FeatureDetailsComponent implements OnInit {
@@ -238,7 +235,7 @@ export class FeatureDetailsComponent implements OnInit {
   country: any = [];
   detailCoordinates: any;
   filteredData: any;
-  panelOpenState;
+  panelOpenState: any;
 
 
 
@@ -269,6 +266,7 @@ export class FeatureDetailsComponent implements OnInit {
   @Output() filter = new EventEmitter<string>();
   featureList: any[];
   checked: boolean;
+  signUuid: any;
   constructor(
     private route: ActivatedRoute,
     private navService: NavService,
@@ -278,12 +276,6 @@ export class FeatureDetailsComponent implements OnInit {
     private _database: ChecklistDatabase,
 
   ) {
-    let signUuid = this.route.snapshot.params.uuid;
-    this.language_service.getSignLanguageById(signUuid).subscribe((data: any) => {
-      this.language_service.getFeaturesMapByLanguage(data.response.code).subscribe((features: any) => {
-        this.featureList = Object.entries(features);
-      });
-    });
     // this.dataSource.data = TREE_DATA;
     this.checked = false;
     this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel, this.isExpandable, this.getChildren);
@@ -293,6 +285,21 @@ export class FeatureDetailsComponent implements OnInit {
     _database.dataChange.subscribe(data => {
       this.dataSource.data = data;
       console.log(this.dataSource);
+    });
+
+  }
+
+  getSignLanguageById(signUuid?: string) {
+    let sign: string;
+    if (signUuid !== undefined) {
+      sign = signUuid;
+    } else {
+      sign = this.route.snapshot.params.uuid;
+    }
+    this.language_service.getSignLanguageById(sign).subscribe((data: any) => {
+      this.language_service.getFeaturesMapByLanguage(data.response.code).subscribe((features: any) => {
+        this.featureList = Object.entries(features);
+      });
     });
 
   }
@@ -349,15 +356,16 @@ export class FeatureDetailsComponent implements OnInit {
 
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.urlUuid = params.get('uuid')
+    this.route.paramMap.subscribe((params: Params) => {
+      this.urlUuid = params.get('uuid');
       this.getLanguageDetail(this.urlUuid);
+      this.getSignLanguageById(this.urlUuid);
     });
 
-    this.route.paramMap.subscribe(params => {
-      this.code = params.get('code')
-      //this.getLanguageDetailCode(this.code);
-    })
+    this.route.paramMap.subscribe((params: Params) => {
+      this.code = params.get('code');
+      // this.getLanguageDetailCode(this.code);
+    });
 
   }
 
@@ -381,7 +389,7 @@ export class FeatureDetailsComponent implements OnInit {
       if (LanguageDetail.coordinates != undefined && LanguageDetail.coordinates != null) {
         LanguageDetail.coordinates = LanguageDetail.coordinates.replace('[', '').replace(']', '');
         console.log(LanguageDetail.coordinates.substr(0, 9) + ' ' + LanguageDetail.coordinates.substr(11, 19));
-        let coordstring = LanguageDetail.coordinates.split(',');
+        const coordstring = LanguageDetail.coordinates.split(',');
 
         this.country[0] = new OlFeature({
           center: fromLonLat([parseFloat(coordstring[1]), parseFloat(coordstring[0])]),
@@ -390,7 +398,7 @@ export class FeatureDetailsComponent implements OnInit {
         }, { description: LanguageDetail.name })
         this.country[0].setStyle(new Style({
           text: new Text({
-            font: "20px cinicon",
+            font: '20px cinicon',
             text: '1',/* rappresenta il pallino circolare */
             fill: new Fill({
               color: '#000000'

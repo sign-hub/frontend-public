@@ -1,10 +1,5 @@
-<div id="map" class="map">
-
-
-
-</div>
-<div #overlayElement id="popup" title="Popup OpenLayers">
-</div>
+<div id="map" class="map"></div>
+<div #overlayElement id="popup" title="Popup OpenLayers"></div>
 <div *ngIf="markerSelected" class="popover">
-  <div><a (click)="(onLanguage())">{{markerSelectedContent.name}}</a></div>
+  <div><a (click)="onLanguage()">{{markerSelectedContent.name}}</a></div>
 </div>

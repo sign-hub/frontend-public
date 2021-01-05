@@ -18,8 +18,9 @@
       <div class="body-content">
         <div class="content custom-scrollbar mat-padding">
           <div class="form-search-term ">
-            <input matInput placeholder="Type at least 3 characters" (input)="filterChanged($event.target.value, null)"
-              class="input-rounded mat-margin-bottom" #filter />
+            <input matInput placeholder="Type at least 3 characters"
+              (input)="filterChanged($event.target.value, null, null)" class="input-rounded mat-margin-bottom"
+              #filter />
             <button *ngIf="filter.value" mat-mini-fab mat-icon-button color="accent" matSuffix aria-label="Clear filter"
               (click)="resetFilter(); filter.value=''" class="mat-elevation-z2">
               <mat-icon>refresh</mat-icon>
@@ -89,7 +90,7 @@
           </mat-list-item>
         </mat-list>
 
-        <div *ngIf="author" class="author-info">
+        <div *ngIf="grammarPart !== undefined && grammarPart !== null && grammarPart.author" class="author-info">
           <mat-list>
             <mat-list-item *ngIf="grammarPart.author">
               <strong>Author</strong> {{grammarPart.author}}
@@ -108,28 +109,22 @@
                 aria-label="click to download this grammar" (click)="downloadFile(grammarUuid, grammarTitle)">
                 <mat-icon>cloud_download</mat-icon>
               </a>
-
-
-
-
-
-
             </mat-list-item>
           </mat-list>
 
-          <h4>{{topic.word}}</h4>
-          <div>{{topic.definition}}</div>
+          <h4>{{topic?.word}}</h4>
+          <div>{{topic?.definition}}</div>
 
         </div>
 
         <div *ngIf="topic" class="topic">
           <div class="header-section-sidebar row mat-padding mat-margin-bottom mat-elevation-z2">
-            <h5 class="mat-no-margin">Gloassary</h5>
+            <h5 class="mat-no-margin">Glossary</h5>
             <mat-slide-toggle color="warn" [(ngModel)]="keepOpen"><small>Keep open</small></mat-slide-toggle>
           </div>
 
-          <h4>{{topic.word}}</h4>
-          <div>{{topic.definition}}</div>
+          <h4>{{topic?.word}}</h4>
+          <div>{{topic?.definition}}</div>
         </div>
       </div>
     </div>
@@ -159,7 +154,8 @@
     </mat-toolbar>
 
     <div *ngIf="grammarPart" class="s-content" id="s-content">
-      <div #centerContainer tabindex="1" placeholder="Text" name="text" [innerHTML]="grammarPart.html | keepHtml" id="text" (click)="getTid($event)">
+      <div #centerContainer tabindex="1" placeholder="Text" name="text" [innerHTML]="grammarPart.html | keepHtml"
+        id="text" (click)="getTid($event)">
       </div>
     </div>
     <div *ngIf="!grammarPart && grammar.frontMatter" class="s-content" id="s-content">

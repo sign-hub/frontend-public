@@ -108,24 +108,28 @@ export class ChecklistDatabase {
     if (node.children === undefined) {
       node.children = new Array<TocItemNode>();
     }
-    Object.keys(childrenParts).forEach(key => {
-      const subObj = childrenParts[key];
-      const part = new TocItemNode();
-      part.item = subObj.name;
-      part.name = subObj.name;
-      part.uuid = subObj.uuid;
-      part.feature = false;
-      this.buildNode(subObj.parts, part);
-
-      if (subObj.features.length !== 0) {
-        this.buildFeatures(subObj.features, part);
-      }
-
-      /* if (node.children == undefined || node.children == null) {
-        node.children = new Array<TocItemNode>();
-      } */
-      node.children.push(part);
-    });
+    if (childrenParts !== undefined) {
+      Object.keys(childrenParts).forEach(key => {
+        const subObj = childrenParts[key];
+        const part = new TocItemNode();
+        part.item = subObj.name;
+        part.name = subObj.name;
+        part.uuid = subObj.uuid;
+        part.feature = false;
+        if (subObj.parts !== undefined && subObj.parts !== null) {
+          this.buildNode(subObj.parts, part);
+          if (subObj.features !== undefined && subObj.features !== null) {
+            if (subObj.features.length !== 0) {
+              this.buildFeatures(subObj.features, part);
+            }
+          }
+        }
+        /* if (node.children == undefined || node.children == null) {
+          node.children = new Array<TocItemNode>();
+        } */
+        node.children.push(part);
+      });
+    }
   }
 
   private buildFeatures(features, node) {
@@ -471,7 +475,7 @@ export class NavigationGrammarFeaturesComponent implements OnInit {
 
 
   public error = false;
-  private errorMsg;
+  public errorMsg;
   relationFeature;
   private selectOnlyLeaf = true;
   public nFeature = [];

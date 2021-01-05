@@ -1,0 +1,51 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer mode="side" [(opened)]="opened" role="navigation">
+    <mat-nav-list>
+      <div class="left-side-nav">
+        <div class="top">
+          <div class="header-content" color="primary">
+            <h1>ISL Video</h1>
+          </div>
+        </div>
+        <div class="history-notes mat-padding">
+          <div class="item col-12" *ngFor="let item of privateVideos; let i = index" (click)="goToVideoDetails(i)">
+            <div class="img-wrapper mat-elevation-z2 mat-margin-bottom center-text">
+              <img src="../../../assets/image/thumb.png"/>
+            </div>
+            <div class="details">
+              <h3 class="item-name mat-h3">{{ item.name }}</h3>
+              <!-- <p class="datetime">{{ item.date }}</p> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="digital-archive-details" *ngIf="!isEmpty">
+      <div class="video-content">
+        <div *ngIf="videoSrc">
+          <iframe [src]="videoSrc | urlTrust" width="640" height="480" frameborder="0"
+            allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="video-details">
+        <div class="header-content">
+          {{videoName}}
+        </div>
+        <div class="body-content">
+          <ul>
+            <li class="sr-only">Original file name : <strong>{{ originalName }}</strong></li>
+            <li>List of keywords : <strong>{{ videoFormat }}</strong></li>
+            <li>Sign language of the actor-signer : <strong>{{ fileSize }}</strong></li>
+            <li>Date of the video : <strong>{{ pubblicationdate | date }}</strong></li>
+            <li>Location : <strong>{{ authorName }}</strong> </li>
+          </ul>
+
+          <mat-divider></mat-divider>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="isEmpty">empty results</div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

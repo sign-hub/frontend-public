@@ -7,7 +7,7 @@ import { Constant } from 'src/app/helpers/constant/constant';
 })
 export class NavService {
 
-  workspaceUrl: string = Constant.workspaces_alias;
+  workspaceUrl: string = Constant.workspacesAlias;
   @Output() detectPage: EventEmitter<any> = new EventEmitter();
 
 

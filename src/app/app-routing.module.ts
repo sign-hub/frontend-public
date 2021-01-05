@@ -1,3 +1,4 @@
+import { DocumentaryComponent } from './pages/digital-archive/documentary/documentary.component';
 import { LscComponent } from './pages/assessment/lsc/lsc.component';
 import { LseComponent } from './pages/assessment/lse/lse.component';
 import { LsfComponent } from './pages/assessment/lsf/lsf.component';
@@ -21,11 +22,12 @@ import { SupportComponent } from './pages/support/support.component';
 import { ConnectsComponent } from './pages/connects/connects.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { NavigationGrammarFeaturesComponent } from './components/navigation-grammar-features/navigation-grammar-features.component';
-import { GrammarFeatureComponent } from './pages/grammar-feature/grammar-feature.component';
 import { NavigationSignLanguageComponent } from './components/navigation-sign-language/navigation-sign-language.component';
 import { SignLanguageComponent } from './pages/sign-language/sign-language.component';
 import { FeatureDetailsComponent } from './pages/sign-language/feature-details/feature-details.component';
 import { SigngramdetailComponent } from './pages/signgramdetail/signgramdetail.component';
+import { IslComponent } from './pages/assessment/isl/isl.component';
+import { PrivateVideoComponent } from './pages/digital-archive/private-video/private-video.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent, pathMatch: 'full' },
@@ -43,10 +45,9 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'digital-archive-main', pathMatch: 'full' },
       { path: 'digital-archive-main', component: DigitalArchiveComponent },
-      { path: 'details/:name', component: DigitalArchiveDetailsComponent },
+      { path: 'details', component: DigitalArchiveDetailsComponent },
     ]
   },
-
   {
     path: 'sign-language', component: NavigationSignLanguageComponent,
     children: [
@@ -70,10 +71,13 @@ const routes: Routes = [
       { path: 'lsf', component: LsfComponent },
       { path: 'lse', component: LseComponent },
       { path: 'lsc', component: LscComponent },
+      { path: 'isl', component: IslComponent },
     ]
   },
   { path: 'streaming', component: IntroPageComponent },
+  { path: 'documentary', component: DocumentaryComponent },
   { path: 'supportingMaterials', component: SupportingMaterialsComponent },
+  { path: 'archive-isl', component: PrivateVideoComponent}
 
 ];
 

@@ -1,28 +1,24 @@
-@import '../../../variables.scss';
+@import "../../../variables.scss";
 
-.main-container{
-  background: #E8E8E8;
+.main-container {
   height: 100%;
-  .faq-content{
+  .faq-content {
     max-width: 1040px;
     margin: auto;
-    background: map-get($cini-colors, color-white);
     height: 100%;
     padding: 0px 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 
-    h2{
+    h2 {
       text-align: center;
     }
-
   }
 
-  mat-expansion-panel{
+  mat-expansion-panel {
     box-shadow: none;
     border: 1px solid gray;
     margin-bottom: 20px;
   }
-
 }

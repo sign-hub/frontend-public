@@ -21,7 +21,7 @@ export class VideoService {
 
   getElements(key) {
     return new Promise((resolve) => {
-      this.elementService.getElements(key).subscribe(
+      this.elementService.getElementsToDisplay(key).subscribe(
         res => {
           this.dataResult = res;
 
@@ -64,7 +64,7 @@ export class VideoService {
 
   getMetadataKey(key, name, metadataName) {
     return new Promise((resolve) => {
-      this.elementService.getElementByName(key, name + "&metadata=" + metadataName).subscribe(
+      this.elementService.getElementByName(key, name /* + "&metadata=" + metadataName */).subscribe(
         res => {
           this.metadata = res;
           let key = this.metadata.key;

@@ -9,8 +9,8 @@ import Point from 'ol/geom/Point';
 import $ from 'jquery';
 
 //const tileUrl = 'https://maps.wikimedia.org/osm-intl/3/4/3.png?lang=en';
-//const tileUrl = 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-const tileUrl = 'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png?lang=en';
+const tileUrl = 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+/* const tileUrl = 'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png?lang=en'; */
 
 @Injectable({
   providedIn: 'root'
@@ -164,12 +164,14 @@ export class MapService {
   }
 
   setIcon(countries) {
-    if (this.map.getTarget() === 'map') {
-      const view = this.map.getView();
-      const source = countries.getSource();
-      const layerExtent = source.getExtent();
-      if (!layerExtent) {
-        view.fit(layerExtent, { maxZoom: 3 });
+    if (this.map !== undefined) {
+      if (this.map.getTarget() === 'map') {
+        const view = this.map.getView();
+        const source = countries.getSource();
+        const layerExtent = source.getExtent();
+        if (!layerExtent) {
+          view.fit(layerExtent, { maxZoom: 3 });
+        }
       }
     }
 

@@ -1,4 +1,4 @@
-
+/*
 import { Directive, ElementRef, HostListener, EventEmitter, Output } from '@angular/core';
 
 @Directive({selector: '[tid]'})
@@ -7,7 +7,7 @@ export class Vocabulary {
   voc: any;
   constructor(
     private el: ElementRef,
-    
+
 
     ) { }
 
@@ -18,7 +18,7 @@ export class Vocabulary {
   }
   @HostListener('click') onClick() {
     let tid = this.el.nativeElement.getAttribute('tid')
-    
+
     this.highlight('yellow');
     this.viewTopic.emit(tid);
     this.voc = tid;
@@ -33,4 +33,4 @@ export class Vocabulary {
   private highlight(color: string) {
     this.el.nativeElement.style.backgroundColor = color;
   }
-}
+} */

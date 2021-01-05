@@ -221,7 +221,8 @@ export class SigngramdetailComponent implements OnInit, OnDestroy {
   topic: any;
   keepOpen: boolean;
 
-  constructor(private route: ActivatedRoute,
+  constructor(
+    private route: ActivatedRoute,
     private router: Router,
     private signgramservice: SigngramService,
     private headerService: HeaderService,

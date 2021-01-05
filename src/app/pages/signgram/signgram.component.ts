@@ -3,6 +3,9 @@ import { HeaderService, CustomMobileQuery } from 'src/app/services/header/header
 import { SigngramService } from 'src/app/services/signgram/signgram.service';
 import { Router } from '@angular/router';
 
+declare var require: any
+const FileSaver = require('file-saver');
+
 @Component({
   selector: 'app-signgram',
   templateUrl: './signgram.component.html',
@@ -77,12 +80,16 @@ export class SigngramComponent implements OnInit, OnDestroy {
       this.slCodeDisabled = true;
       this.grammarNameDisabled = false;
     } else if (what === 'grammarName') {
-      this.what = "grammarName";
+      this.what = 'grammarName';
       this.whatOb = null;
       this.slCodeDisabled = false;
       this.grammarNameDisabled = true;
-      ;
     }
+  }
+  downloadFile(uuid, filename) {
+    const fileUrl = this.signgramService.downloadGrammarLink(uuid);
+    const fileName = filename;
+    FileSaver.saveAs(fileUrl, fileName);
   }
 
 }

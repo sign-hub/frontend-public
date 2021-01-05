@@ -7,8 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LsfComponent implements OnInit {
 
-  ngOnInit(): void {
+  videosMuted: any;
 
+  ngOnInit(): void {
+    this.videosMuted = document.getElementsByClassName('muted');
+    for (const video of this.videosMuted) {
+      video.muted = true;
+    }
   }
 
 }

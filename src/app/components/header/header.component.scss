@@ -46,6 +46,19 @@
   &.active-grammars {
     background: map-get($cini-colors, color-red);
   }
+
+  &.digital-archive {
+    background: map-get($cini-colors, color-blue);
+    color: white;
+  }
+  &.documentary {
+    background: map-get($cini-colors, color-red);
+    color: white;
+  }
+  &.archive-isl {
+    background-color: map-get($cini-colors, color-blue);
+    color: white;
+  }
 }
 /*
 .grammar-feature {
@@ -85,6 +98,99 @@
   left: 0;
   height: 10px;
   bottom: -10px;
+}
+
+.dropdown-menu-streaming {
+  position: absolute;
+  margin-top: 28px;
+  margin-left: -10px;
+  z-index: 2;
+  background: #e8e8e8;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  padding: 10px 20px;
+  // margin-left: -75px;
+  border-radius: 0px;
+  min-width: 246px;
+  box-shadow: 0px 3px 5px 2px rgba(0, 0, 0, 0.08);
+
+  a {
+    color: var(--color-dark, #333333);
+    text-decoration: none;
+    font-weight: normal;
+    line-height: 46px;
+    width: 100%;
+    text-align: left;
+    position: relative;
+
+    &.active-sublink {
+      font-weight: 700;
+    }
+    &.secondLvl {
+      .active-link {
+        background: rgba(255, 255, 255, 0.4);
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        width: calc(100% + 40px);
+        font-weight: 700;
+      }
+    }
+
+    &:first-of-type {
+      &::before {
+        content: "";
+        width: 6px;
+        height: 14px;
+        background: var(--default-color);
+        display: inline-block;
+        margin-right: 5px;
+      }
+    }
+    &:nth-of-type(2) {
+      &::before {
+        content: "";
+        width: 6px;
+        height: 14px;
+        background: var(--primary);
+        display: inline-block;
+        margin-right: 5px;
+      }
+    }
+    &:nth-of-type(3) {
+      &::before {
+        content: "";
+        width: 6px;
+        height: 14px;
+        background: var(--color-red);
+        display: inline-block;
+        margin-right: 5px;
+      }
+    }
+    &:nth-of-type(4) {
+      &::before {
+        content: "";
+        width: 6px;
+        height: 14px;
+        background: map-get($cini-colors, color-blue);
+        display: inline-block;
+        margin-right: 5px;
+      }
+    }
+
+    &:last-of-type {
+      &::before {
+        content: "";
+        width: 6px;
+        height: 14px;
+        background: map-get($cini-colors, color-blue);
+        display: inline-block;
+        margin-right: 5px;
+      }
+    }
+  }
 }
 
 .dropdown-menu {
@@ -464,5 +570,13 @@
       height: 10px;
       top: 71px;
     }
+  }
+}
+
+a {
+  &.disabled-link {
+    pointer-events: none;
+    color: gray !important;
+    cursor: pointer;
   }
 }

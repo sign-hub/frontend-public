@@ -1,3 +1,4 @@
+import { DocumentaryComponent } from './pages/digital-archive/documentary/documentary.component';
 import { LseComponent } from './pages/assessment/lse/lse.component';
 import { LscComponent } from './pages/assessment/lsc/lsc.component';
 import { WelcomePage } from './pages/assessment/welcome-page/welcome-page.component';
@@ -53,6 +54,9 @@ import { VideoDialogComponent } from './components/video-dialog/video-dialog.com
 import { SigngramdetailComponent } from './pages/signgramdetail/signgramdetail.component';
 import { MatSlideToggleModule } from '@angular/material';
 import { FilterlistPipe } from './pipes/filterlist.pipe';
+import { IslComponent } from './pages/assessment/isl/isl.component';
+import { PrivateVideoComponent } from './pages/digital-archive/private-video/private-video.component';
+import { UrlTrustPipe } from './pipes/UrlTrust.pipe';
 // import { Vocabulary } from './directives/vocabulary.directive';
 
 @NgModule({
@@ -81,6 +85,7 @@ import { FilterlistPipe } from './pipes/filterlist.pipe';
     SigngramdetailComponent,
     EscapeHtmlPipe,
     FilterlistPipe,
+    UrlTrustPipe,
     ProjectComponent,
     SupportingMaterialsComponent,
     IntroPageComponent,
@@ -89,7 +94,10 @@ import { FilterlistPipe } from './pipes/filterlist.pipe';
     LsfComponent,
     LscComponent,
     LseComponent,
-    WelcomePage
+    IslComponent,
+    WelcomePage,
+    DocumentaryComponent,
+    PrivateVideoComponent
     // Vocabulary,
   ],
   imports: [
@@ -117,7 +125,7 @@ import { FilterlistPipe } from './pipes/filterlist.pipe';
     DigitalArchiveService,
     { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },
   ],
-  entryComponents: [VideoDialogComponent],
+  entryComponents: [VideoDialogComponent, NavigationStreamingToolComponent, DigitalArchiveComponent],
   bootstrap: [AppComponent],
 
 })

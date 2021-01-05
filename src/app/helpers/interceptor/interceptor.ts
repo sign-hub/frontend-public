@@ -30,10 +30,14 @@ export class Interceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     token = null
   ): HttpRequest<any> {
+    console.log('interceptor')
     let clone: HttpRequest<any>;
     let header: HttpHeaders = request.headers;
+    let resp = 'json'
     if (header.get('Accept') === null) {
       header = header.set('Accept', 'application/json');
+    } else {
+      resp = 'text';
     }
 
     if (header.get('Content-type') === null) {
@@ -47,10 +51,11 @@ export class Interceptor implements HttpInterceptor {
       header = header.set('Authorization', `Bearer ${token}`);
     }
 
-    clone = request.clone({
-      headers: header,
-      responseType: request.responseType
-    });
+    if(resp == 'json' || resp == 'text')
+      clone = request.clone({
+        headers: header,
+        responseType: resp
+      });
     return clone;
   }
 }

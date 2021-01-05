@@ -1,5 +1,6 @@
+import { DigitalArchiveComponent } from './../../pages/digital-archive/digital-archive.component';
 import { DigitalArchiveService } from './../../services/digital-archive/digital-archive.service';
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, HostListener, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
 import { NavService } from 'src/app/services/navigation-streaming-tool/nav.service';
 import { ElementsService } from 'src/app/services/elements/elements.service';
 import { Router, Params } from '@angular/router';
@@ -29,7 +30,10 @@ export class NavigationStreamingToolComponent implements OnInit {
   originalName: any;
   metadata: any;
   metadataResults: any;
-  signLanguageLinkParam: any;
+
+  @ViewChild('parent', { read: ViewContainerRef, static: true })
+  parent: ViewContainerRef;
+
   public controllerDigitalArchive: any;
   constructor(
     private navService: NavService,
@@ -37,7 +41,8 @@ export class NavigationStreamingToolComponent implements OnInit {
     private elementService: ElementsService,
     private router: Router,
     private videoService: VideoService,
-    private digitalArchiveService: DigitalArchiveService
+    private digitalArchiveService: DigitalArchiveService,
+    private componentFactoryResolver: ComponentFactoryResolver
   ) {
     this.controllerDigitalArchive = this.navService.getCurrentController();
     this.navService.setCurrentNavBar(this);
@@ -48,12 +53,11 @@ export class NavigationStreamingToolComponent implements OnInit {
       this.isPageDetails = data;
       this.cdRef.detectChanges();
     });
-    this.getKey();
+    /* this.getKey(); */
 
-    this.controllerDigitalArchive.route.queryParams.subscribe((params: Params) => {
-      this.signLanguageLinkParam = params.sl;
-      this.controllerDigitalArchive.searchTerm = this.signLanguageLinkParam;
-    });
+    const childComponent = this.componentFactoryResolver.resolveComponentFactory(DigitalArchiveComponent);
+    this.parent.createComponent(childComponent);
+    this.parent.clear();
 
   }
 
@@ -62,12 +66,12 @@ export class NavigationStreamingToolComponent implements OnInit {
       this.results = res;
       this.key = this.results.key;
       this.getElements(this.key);
-      localStorage.setItem('key', this.key)
+      localStorage.setItem('key', this.key);
     })
   }
 
   getElements(key) {
-    this.elementService.getElements(key).subscribe(
+    this.elementService.getElementsToDisplay(key).subscribe(
       res => {
 
         this.dataResult = res;
@@ -94,7 +98,7 @@ export class NavigationStreamingToolComponent implements OnInit {
 
         this.video = res;
         this.originalName = this.video.name;
-        this.getMetadataKey(key, videoName, 'oai_dc');
+        // this.getMetadataKey(key, videoName, 'oai_dc');
       },
       error => {
         console.log('error', error);
@@ -209,4 +213,5 @@ export class NavigationStreamingToolComponent implements OnInit {
     this.router.navigate(['/digital-archive/details/', this.videoName]);
     this.navService.triggerDetailsContent(this.videoName);
   }
+
 }

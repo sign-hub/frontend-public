@@ -1,4 +1,4 @@
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container class="sidenav-container" #parent>
   <mat-sidenav #drawer mode="side" [(opened)]="this.controllerDigitalArchive.opened" role="navigation">
     <mat-nav-list>
       <div class="left-side-nav">
@@ -26,22 +26,29 @@
           <!-- <span>Last uploaded video: gg/mm/aa</span>
           <span> total videos: {{ totalVideos }}</span> -->
           <div class="filter">
-            <input *ngIf="!signLanguageLinkParam" class="input-rounded" placeholder="Type at least 3 characters"
+            <input
+              *ngIf="this.controllerDigitalArchive.searchName && this.controllerDigitalArchive.searchName == 'name'"
+              class="input-rounded" placeholder="Search by name" [(ngModel)]="this.controllerDigitalArchive.searchTerm"
+              (input)="this.controllerDigitalArchive.setFilteredData('name')">
+            <input
+              *ngIf="this.controllerDigitalArchive.searchName && this.controllerDigitalArchive.searchName == 'metadata'"
+              class="input-rounded" placeholder="Search by keywords"
               [(ngModel)]="this.controllerDigitalArchive.searchTerm"
-              (input)="this.controllerDigitalArchive.setFilteredData()">
-            <input *ngIf="signLanguageLinkParam" class="input-rounded" placeholder="Type at least 3 characters"
-              [(ngModel)]="this.controllerDigitalArchive.searchTerm"
-              (input)="this.controllerDigitalArchive.setFilteredData()">
+              (input)="this.controllerDigitalArchive.setFilteredData('metadata')">
             <button mat-icon-button [matMenuTriggerFor]="menu" color="action" class="double-icons"
               aria-label="sort results">
-              <mat-icon matSuffix>sort arrow_drop_down </mat-icon>
+              <mat-icon matSuffix>
+                search arrow_drop_down
+              </mat-icon>
             </button>
             <mat-menu #menu="matMenu" xPosition="after">
-              <button mat-menu-item (click)="this.controllerDigitalArchive.sortByName()">
+              <button mat-menu-item (click)="this.controllerDigitalArchive.changeFilter('name')"
+                [disabled]="this.controllerDigitalArchive.nameDisabled" aria-label="search by name">
                 <mat-icon matSuffix>text_fields</mat-icon> Name
               </button>
-              <button mat-menu-item (click)="this.controllerDigitalArchive.sortByDate()">
-                <mat-icon matSuffix>calendar_today</mat-icon> Date
+              <button mat-menu-item (click)="this.controllerDigitalArchive.changeFilter('metadata')"
+                [disabled]="this.controllerDigitalArchive.metadataDisabled" aria-label="search by metadata">
+                <mat-icon matSuffix>find_in_page</mat-icon> Search
               </button>
             </mat-menu>
             <button mat-icon-button (click)="this.controllerDigitalArchive.toggleDisplayMode()"
