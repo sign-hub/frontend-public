@@ -24,7 +24,7 @@
     "angular2-cookie-law": "^7.0.1",
     "file-saver": "^2.0.2",
     "hammerjs": "^2.0.8",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "ng2-order-pipe": "^0.1.5",
     "ngx-skeleton-loader": "^1.2.6",
     "ol": "^5.3.3",
